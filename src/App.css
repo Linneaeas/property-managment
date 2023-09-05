@@ -4,11 +4,14 @@ body {
   font-family: Quicksand;
 }
 
-header {
-  display: flex;
+.Header {
   background-color: rgb(196, 96, 149);
+  text-align: center;
   width: 100%;
   height: 3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 h1 {
@@ -20,18 +23,11 @@ button:hover {
   cursor: pointer;
 }
 
-/*START PAGE*/
-
 .StartPageWrap,
 .StartPage {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-}
-
-.StartPageHeader {
-  justify-content: center;
-  align-items: center;
 }
 
 .StartPage {
