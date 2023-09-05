@@ -3,9 +3,11 @@ import { StartPage } from "./Views/start-page.js";
 
 function App() {
   return (
-    <div className="App">
-      <StartPage />
-    </div>
+    <>
+      <div className="App">
+        <StartPage />
+      </div>
+    </>
   );
 }
 

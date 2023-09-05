@@ -1,20 +1,47 @@
 body {
-  background-color: rgba(232, 167, 243, 0.4);
+  background-color: rgb(255, 240, 248);
   margin: 0;
+  font-family: Quicksand;
+}
+
+.Header {
+  background-color: rgb(196, 96, 149);
+  text-align: center;
+  width: 100%;
+  height: 3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 h1 {
-  color: rgb(46, 30, 49);
+  color: rgb(255, 255, 255);
+  font-size: 25px;
 }
 
-.App {
-  height: 100vh;
+button:hover {
+  cursor: pointer;
+}
+
+.StartPageWrap,
+.StartPage {
   display: flex;
-  align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .StartPage {
-  display: grid;
+  height: fit-content;
+  width: 15em;
   gap: 2em;
+  padding: 8em;
+}
+
+.StartPageBTN {
+  background-color: rgb(196, 96, 149);
+  font-family: Quicksand;
+  font-size: 25px;
+  color: rgb(255, 255, 255);
+  border: 10px solid rgb(196, 96, 149);
+  border-radius: 25px;
 }
