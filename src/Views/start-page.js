@@ -1,7 +1,7 @@
 export function StartPage() {
   return (
     <div className="StartPageWrap">
-      <header className="Header">
+      <header className="Header" id="StartHeader">
         <h1>CHOOSE USER</h1>
       </header>
       <div className="StartPage">
