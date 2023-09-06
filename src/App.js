@@ -11,7 +11,7 @@ function App() {
       <BrowserRouter>
         <nav>
           <Link to="/">Home</Link>
-          <Link to="/Views/admin-start"> Admin</Link>
+          <Link to="/Admin"> Admin</Link>
         </nav>
 
         <Routes>
