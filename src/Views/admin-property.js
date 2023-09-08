@@ -1,7 +1,10 @@
+import { useParams } from "react-router-dom";
+
 export function AdminProperty() {
+  const { id } = useParams();
   return (
     <div>
-      <aside className="AdminSideBar"> </aside>
+      <p>Admin Property</p>
     </div>
   );
 }

@@ -1,7 +1,9 @@
+import { Route, Routes, Link } from "react-router-dom";
 export function AdminStart() {
   return (
-    <div>
-      <nav class="AdminNav"></nav>
-    </div>
+    <>
+      <p>Admin Start</p>
+      <Link to="/Admin/1">AdminProperty</Link>
+    </>
   );
 }
