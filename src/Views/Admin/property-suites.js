@@ -1,4 +1,4 @@
-function AdminPropertySuites() {
+export function AdminPropertySuites() {
   return (
     <div>
       <h2>Suites</h2>

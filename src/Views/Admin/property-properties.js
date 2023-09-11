@@ -1,4 +1,4 @@
-function AdminPropertyProperties() {
+export function AdminPropertyProperties() {
   return (
     <div>
       <h2>Properties</h2>

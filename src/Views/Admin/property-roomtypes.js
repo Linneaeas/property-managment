@@ -1,4 +1,4 @@
-function AdminPropertyRoomtypes() {
+export function AdminPropertyRoomtypes() {
   return (
     <div>
       <h2>Roomtypes</h2>

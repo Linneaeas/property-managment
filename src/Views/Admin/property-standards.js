@@ -1,4 +1,4 @@
-function AdminPropertyStandards() {
+export function AdminPropertyStandards() {
   return (
     <div>
       <h2>Standards</h2>
