@@ -1,6 +1,7 @@
 import "./App.css";
 import React, { useState } from "react";
-import LoginForm from "./Components/LoginForm";
+import LoginForm from "./Components/login-form";
+import { AdminStart } from "./Views/Admin/admin-start";
 
 function App() {
   const adminUser = {
@@ -10,41 +11,31 @@ function App() {
 
   const [user, setUser] = useState({ name: "", email: "" });
   const [error, setError] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const Login = (details) => {
-    console.log(details);
-
     if (
-      details.email == adminUser.email &&
-      details.password == adminUser.password
+      details.email === adminUser.email &&
+      details.password === adminUser.password
     ) {
-      console.log("Logged in");
       setUser({
         name: details.name,
         email: details.email,
       });
+      setIsAdmin(true);
     } else {
-      console.log("Details don't match");
       setError("Details don't match");
     }
   };
 
   const Logout = () => {
     setUser({ name: "", email: "" });
+    setIsAdmin(false);
   };
 
   return (
     <main className="App">
-      {user.email != "" ? (
-        <div classname="welcome">
-          <h2>
-            Welcome, <span>{user.name}</span>
-          </h2>
-          <button onClick={Logout}>Logout</button>
-        </div>
-      ) : (
-        <LoginForm Login={Login} error={error} />
-      )}
+      {isAdmin ? <AdminStart /> : <LoginForm Login={Login} error={error} />}
     </main>
   );
 }
