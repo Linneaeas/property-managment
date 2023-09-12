@@ -34,7 +34,11 @@ function App() {
 
   return (
     <main className="App">
-      {isAdmin ? <AdminStart /> : <LoginForm Login={Login} error={error} />}
+      {isAdmin ? (
+        <AdminStart Logout={Logout} />
+      ) : (
+        <LoginForm Login={Login} error={error} />
+      )}
     </main>
   );
 }
