@@ -5,31 +5,30 @@ import { AdminStart } from "./Views/Admin/admin-start";
 
 function App() {
   const adminUser = {
-    email: "admin@admin.com",
+    username: "Admin",
     password: "admin123",
   };
 
-  const [user, setUser] = useState({ name: "", email: "" });
+  const [user, setUser] = useState({ username: "" });
   const [error, setError] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
 
   const Login = (details) => {
     if (
-      details.email === adminUser.email &&
+      details.username === adminUser.username &&
       details.password === adminUser.password
     ) {
       setUser({
-        name: details.name,
-        email: details.email,
+        username: details.username,
       });
       setIsAdmin(true);
     } else {
-      setError("Details don't match");
+      setError("Wrong Username or Password, Please try again");
     }
   };
 
   const Logout = () => {
-    setUser({ name: "", email: "" });
+    setUser({ name: "" });
     setIsAdmin(false);
   };
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 export default function LoginForm({ Login, error }) {
-  const [details, setDetails] = useState({ name: "", email: "", password: "" });
+  const [details, setDetails] = useState({ username: "", password: "" });
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -11,44 +11,41 @@ export default function LoginForm({ Login, error }) {
   return (
     <>
       <form onSubmit={submitHandler}>
-        <div className="form-inner">
-          <h2>Login</h2>
+        <div className="Header">
+          <h1>LOGIN</h1>
+        </div>
+        <div className="Form">
           {error != "" ? <div className="error">{error}</div> : ""}
-          <div className="form-group">
-            <label htmlFor="name">Name:</label>
+          <div className="FormGroup">
+            <label htmlFor="username" id="LoginLabel">
+              Username:{" "}
+            </label>
             <input
               type="text"
               name="name"
-              id="name"
-              onChange={(e) => setDetails({ ...details, name: e.target.value })}
-              value={details.name}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              name="email"
-              id="email"
+              id="LoginInput"
               onChange={(e) =>
-                setDetails({ ...details, email: e.target.value })
+                setDetails({ ...details, username: e.target.value })
               }
-              value={details.email}
+              value={details.username}
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="password">Password:</label>
+
+          <div className="FormGroup">
+            <label htmlFor="password" id="LoginLabel">
+              Password:{" "}
+            </label>
             <input
               type="password"
               name="password"
-              id="password"
+              id="LoginInput"
               onChange={(e) =>
                 setDetails({ ...details, password: e.target.value })
               }
               value={details.password}
             />
           </div>
-          <input type="submit" value="LOGIN" />
+          <input className="LoginBTN" type="submit" value="LOGIN" />
         </div>
       </form>
       ;

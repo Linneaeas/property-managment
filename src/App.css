@@ -10,6 +10,7 @@ body {
   height: 3em;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 h1 {
@@ -17,33 +18,36 @@ h1 {
   font-size: 25px;
 }
 
-button:hover {
+button:hover,
+input:hover {
   cursor: pointer;
 }
 
-#StartHeader {
-  justify-content: center;
-}
-
-.StartPageWrap,
-.StartPage {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.StartPage {
-  height: fit-content;
-  width: 15em;
-  gap: 2em;
-  padding: 8em;
-}
-
-.StartPageBTN {
+.LoginBTN {
   background-color: rgb(196, 96, 149);
   font-family: Quicksand;
-  font-size: 25px;
+  font-size: 20px;
   color: rgb(255, 255, 255);
-  border: 10px solid rgb(196, 96, 149);
+  border: 5px solid rgb(196, 96, 149);
   border-radius: 25px;
+}
+
+.Form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  margin-top: 2em;
+}
+
+#LoginLabel {
+  color: rgb(141, 68, 107);
+}
+
+#LoginInput {
+  background: rgba(196, 96, 149, 0.4);
+  border-radius: 25px;
+  border: none;
+  height: 30px;
 }
