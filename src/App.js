@@ -30,6 +30,7 @@ function App() {
   const Logout = () => {
     setUser({ name: "" });
     setIsAdmin(false);
+    setError("");
   };
 
   return (
