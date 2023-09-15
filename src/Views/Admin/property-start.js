@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Navigation } from "react-router-dom";
 import { AdminStart } from "./admin-start";
 import { AdminPropertyStandards } from "./property-standards";
 import { AdminPropertySuites } from "./property-suites";
@@ -11,15 +10,16 @@ import { AdminPropertyFacilities } from "./property-facilities";
 
 export function AdminPropertyStart() {
   return (
-    <aside className="PropertyNav">
+    <div className="PropertyNav">
       <div className="LinkContainer">
-        <Link to="./Standards">Standards</Link>
-        <Link to="./Suites">Suites</Link>
-        <Link to="./Beds">Beds</Link>
-        <Link to="./Roomtypes">Roomtypes</Link>
-        <Link to="./Properties">Properties</Link>
-        <Link to="./Facilities">Facilities</Link>
+        <h3>PROPERTY</h3>
+        <Link to="/Property/Standards">Standards</Link>
+        <Link to="/Property/Suites">Suites</Link>
+        <Link to="/Property/Beds">Beds</Link>
+        <Link to="/Property/Roomtypes">Roomtypes</Link>
+        <Link to="/Property/Properties">Properties</Link>
+        <Link to="/Property/Facilities">Facilities</Link>
       </div>
-    </aside>
+    </div>
   );
 }
