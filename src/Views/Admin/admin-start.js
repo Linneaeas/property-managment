@@ -15,7 +15,29 @@ export function AdminStart({ Logout }) {
       <div className="AdminNav">
         <div className="Dropdown">
           <button className="Link"> PROPERTY </button>
-          <div className="DropdownMenu"> Dropdown content</div>
+          <div className="DropdownMenu">
+            <div className="DDOverview">
+              <Link to="/Overview">Overview</Link>
+            </div>
+            <div className="DDLinks">
+              <Link to="/Standards">Standards</Link>
+            </div>
+            <div className="DDLinks">
+              <Link to="/Suites">Suites</Link>
+            </div>
+            <div className="DDLinks">
+              <Link to="/Beds">Beds</Link>
+            </div>
+            <div className="DDLinks">
+              <Link to="/Roomtypes">Roomtypes</Link>
+            </div>
+            <div className="DDLinks">
+              <Link to="/Properties">Properties</Link>
+            </div>
+            <div className="DDLinks">
+              <Link to="/Facilities">Facilities</Link>
+            </div>{" "}
+          </div>
         </div>
         <div className="Dropdown">
           <button className="Link"> REVENUE </button>
@@ -31,19 +53,13 @@ export function AdminStart({ Logout }) {
         </div>
       </div>
       <Routes>
-        <Route path="Property/Overwiev" element={<AdminPropertyOverview />} />
-        <Route path="Property/Standards" element={<AdminPropertyStandards />} />
-        <Route path="Property/Suites" element={<AdminPropertySuites />} />
-        <Route path="Property/Beds" element={<AdminPropertyBeds />} />
-        <Route path="Property/Roomtypes" element={<AdminPropertyRoomtypes />} />
-        <Route
-          path="Property/Properties"
-          element={<AdminPropertyProperties />}
-        />
-        <Route
-          path="Property/Facilities"
-          element={<AdminPropertyFacilities />}
-        />
+        <Route path="/Overview" element={<AdminPropertyOverview />} />
+        <Route path="/Standards" element={<AdminPropertyStandards />} />
+        <Route path="/Suites" element={<AdminPropertySuites />} />
+        <Route path="/Beds" element={<AdminPropertyBeds />} />
+        <Route path="/Roomtypes" element={<AdminPropertyRoomtypes />} />
+        <Route path="/Properties" element={<AdminPropertyProperties />} />
+        <Route path="/Facilities" element={<AdminPropertyFacilities />} />
       </Routes>
     </div>
   );

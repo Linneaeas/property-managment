@@ -13,12 +13,12 @@ body {
 }
 
 #LogoutButton,
-.Link {
+.Link,
+a {
   background: none;
   border: none;
   text-decoration: none;
   padding: 0;
-  color: var(--white);
   font-family: inherit;
 }
 
@@ -31,18 +31,27 @@ body {
   font-size: 15px;
   position: absolute;
   padding: 10px;
+  color: var(--white);
 }
 
 .Link {
   font-size: 20px;
+  color: var(--white);
+}
+
+a {
+  color: var(--darkBackground);
+  font-size: 17px;
 }
 
 button:hover,
-#LogoutButton:hover {
+#LogoutButton:hover,
+a:hover {
   color: var(--darkerHover);
 }
 button:hover,
-input:hover {
+input:hover,
+a:hover {
   cursor: pointer;
 }
 
@@ -113,6 +122,19 @@ input:hover {
   pointer-events: none;
   transform: translateY(-10px);
   transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.DDOverview {
+  grid-column: 1 / span 2;
+}
+
+.DDLinks {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 
 .Dropdown > .Link:focus + .DropdownMenu {
