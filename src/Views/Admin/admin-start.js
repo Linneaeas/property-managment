@@ -1,6 +1,6 @@
 import LogoutButton from "../../Components/logout-button";
 import { Routes, Route, Link } from "react-router-dom";
-import { AdminPropertyStart } from "./property-start";
+import { AdminPropertyOverview } from "./property-overview";
 import { AdminPropertyStandards } from "./property-standards";
 import { AdminPropertySuites } from "./property-suites";
 import { AdminPropertyBeds } from "./property-beds";
@@ -10,44 +10,41 @@ import { AdminPropertyFacilities } from "./property-facilities";
 
 export function AdminStart({ Logout }) {
   return (
-    <div>
+    <div className="AdminHeader">
       {Logout && <LogoutButton Logout={Logout} />}
-      <div className="Header">
-        <h1>ADMIN</h1>
-      </div>
-      <div>
-        <div className="AdminHeader">
-          <nav className="AdminNav">
-            <Link to="./Property">PROPERTY</Link>
-            <p> REVENUE </p>
-            <p> FINANCIAL </p>
-            <p> ADVANCED </p>
-            <p> MISCELLANIOUS </p>
-          </nav>
+      <div className="AdminNav">
+        <div className="Dropdown">
+          <button className="Link"> PROPERTY </button>
+          <div className="DropdownMenu"> Dropdown content</div>
         </div>
-
-        <Routes>
-          <Route path="Property" element={<AdminPropertyStart />} />
-          <Route
-            path="Property/Standards"
-            element={<AdminPropertyStandards />}
-          />
-          <Route path="Property/Suites" element={<AdminPropertySuites />} />
-          <Route path="Property/Beds" element={<AdminPropertyBeds />} />
-          <Route
-            path="Property/Roomtypes"
-            element={<AdminPropertyRoomtypes />}
-          />
-          <Route
-            path="Property/Properties"
-            element={<AdminPropertyProperties />}
-          />
-          <Route
-            path="Property/Facilities"
-            element={<AdminPropertyFacilities />}
-          />
-        </Routes>
+        <div className="Dropdown">
+          <button className="Link"> REVENUE </button>
+        </div>
+        <div className="Dropdown">
+          <button className="Link"> FINANCIAL </button>
+        </div>
+        <div className="Dropdown">
+          <button className="Link"> ADVANCED </button>
+        </div>
+        <div className="Dropdown">
+          <button className="Link"> MISCELLANIOUS </button>
+        </div>
       </div>
+      <Routes>
+        <Route path="Property/Overwiev" element={<AdminPropertyOverview />} />
+        <Route path="Property/Standards" element={<AdminPropertyStandards />} />
+        <Route path="Property/Suites" element={<AdminPropertySuites />} />
+        <Route path="Property/Beds" element={<AdminPropertyBeds />} />
+        <Route path="Property/Roomtypes" element={<AdminPropertyRoomtypes />} />
+        <Route
+          path="Property/Properties"
+          element={<AdminPropertyProperties />}
+        />
+        <Route
+          path="Property/Facilities"
+          element={<AdminPropertyFacilities />}
+        />
+      </Routes>
     </div>
   );
 }

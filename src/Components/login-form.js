@@ -9,11 +9,9 @@ export default function LoginForm({ Login, error }) {
   };
 
   return (
-    <>
+    <div className="LoginView">
+      <h1 className="StartPageHeader">LOGIN</h1>
       <form onSubmit={submitHandler}>
-        <div className="Header">
-          <h1>LOGIN</h1>
-        </div>
         <div className="Form">
           {error != "" ? <div className="error">{error}</div> : ""}
           <div className="FormGroup">
@@ -49,6 +47,6 @@ export default function LoginForm({ Login, error }) {
         </div>
       </form>
       ;
-    </>
+    </div>
   );
 }

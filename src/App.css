@@ -1,124 +1,122 @@
+:root {
+  --lightPink: rgb(255, 240, 248);
+  --white: rgb(255, 255, 255);
+  --darkerHover: rgb(244, 161, 206);
+  --darkBackground: rgb(196, 96, 149);
+  --darkText: rgb(141, 68, 107);
+}
+/* UNIVERSAL */
 body {
-  background-color: rgb(255, 240, 248);
+  background-color: var(--lightPink);
   margin: 0;
   font-family: Quicksand;
 }
 
-.Header {
-  background-color: rgb(196, 96, 149);
-  width: 100%;
-  height: 3em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+#LogoutButton,
+.Link {
+  background: none;
+  border: none;
+  text-decoration: none;
+  padding: 0;
+  color: var(--white);
+  font-family: inherit;
 }
 
-h1 {
-  color: rgb(255, 255, 255);
-  font-size: 25px;
+.Dropdown > .Link:focus,
+.Link:hover {
+  color: var(--darkerHover);
 }
-h3 {
-  color: rgb(255, 255, 255);
+
+#LogoutButton {
+  font-size: 15px;
+  position: absolute;
+  padding: 10px;
+}
+
+.Link {
   font-size: 20px;
 }
 
 button:hover,
-input:hover,
-a:hover {
+#LogoutButton:hover {
+  color: var(--darkerHover);
+}
+button:hover,
+input:hover {
   cursor: pointer;
-  color: rgb(244, 161, 206);
 }
 
+/*LOGIN VIEW*/
 .LoginBTN {
-  background-color: rgb(196, 96, 149);
+  background-color: var(--darkBackground);
   font-family: Quicksand;
   font-size: 20px;
-  color: rgb(255, 255, 255);
-  border: 5px solid rgb(196, 96, 149);
+  color: var(--white);
+  padding: 0.5rem;
+  border: none;
   border-radius: 25px;
 }
-
+.StartPageHeader,
 .Form {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+}
+.StartPageHeader {
+  font-size: 25px;
+  padding: 5px;
+  margin: 0;
+  background-color: var(--darkBackground);
+  color: var(--white);
+}
+.Form {
+  flex-direction: column;
   gap: 1em;
   margin-top: 2em;
 }
-
 #LoginLabel {
-  color: rgb(141, 68, 107);
+  color: var(--darkText);
 }
-
 #LoginInput {
-  background: rgba(196, 96, 149, 0.4);
+  background: rgb(196, 96, 149, 0.4);
   border-radius: 25px;
   border: none;
   height: 30px;
 }
 
-#LogoutButton {
-  background-color: transparent;
-  font-family: Quicksand;
-  font-size: 15px;
-  color: rgb(255, 255, 255);
-  border: 5px solid transparent;
-  border-radius: 25px;
-  position: absolute;
-  margin-top: 8px;
-}
+/*ADMIN VIEW*/
 
 .AdminHeader {
-  display: flex;
-  width: 100%;
-  justify-content: center;
+  background-color: var(--darkBackground);
 }
 
 .AdminNav {
-  background-color: rgb(196, 96, 149);
-  width: 90%;
-  height: 2em;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-left: 15px;
-  padding-right: 15px;
-  color: rgb(255, 255, 255); /*Only ness. when not actual links*/
-  font-size: 20px; /*Only ness. when not actual links*/
-  border-radius: 25px;
-  border: 2px solid rgb(255, 240, 248);
-  margin-top: -10px;
-}
-
-.PropertyNav {
-  height: 500px;
-  width: 150px;
-  background-color: rgb(196, 96, 149);
-  margin-left: 1em;
-  border-radius: 25px;
-}
-
-.LinkContainer {
-  display: flex;
-  flex-direction: column;
-  padding: 15px;
-  font-size: 20px;
-  gap: 1em;
-}
-
-.PropertyContainer {
-  display: flex;
-}
-
-.PropertyContent {
   display: flex;
   justify-content: center;
-  width: 100vh;
+  padding: 0.5rem;
+  gap: 3rem;
 }
 
-a {
-  color: rgb(255, 255, 255);
-  font-size: 20px;
-  text-decoration: none;
+.Dropdown {
+  position: relative;
+}
+
+.DropdownMenu {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 0.25rem);
+  background-color: var(--lightPink);
+  padding: 0.75rem;
+  border-radius: 0.25rem;
+  box-shadow: 2px 3px 6px 2px rgb(196, 96, 149, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-10px);
+  transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+}
+
+.Dropdown > .Link:focus + .DropdownMenu {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }

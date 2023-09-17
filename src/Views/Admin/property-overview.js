@@ -1,8 +1,9 @@
-export function AdminPropertyStandards() {
+import React from "react";
+export function AdminPropertyOverview() {
   return (
     <div className="PropertyContainer">
       <div className="PropertyContent">
-        <h2>Standards</h2>
+        <h2>Overview</h2>
       </div>
     </div>
   );
