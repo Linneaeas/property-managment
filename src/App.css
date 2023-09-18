@@ -12,6 +12,10 @@ body {
   font-family: Quicksand;
 }
 
+h1 {
+  color: var(--darkBackground);
+}
+
 #LogoutButton,
 .Link,
 a {
@@ -137,8 +141,22 @@ a:hover {
   gap: 1rem;
 }
 
-.Dropdown > .Link:focus + .DropdownMenu {
+.DropdownMenu.visible {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
+}
+
+.PropertyContainer {
+  display: flex;
+  justify-content: center;
+}
+.PropertyContent {
+  position: absolute;
+}
+
+#THTableHeadline,
+#TRTableHeadline {
+  padding: 1em;
+  color: var(--darkBackground);
 }
