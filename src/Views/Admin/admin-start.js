@@ -1,7 +1,7 @@
 import LogoutButton from "../../Components/logout-button";
 import { Routes, Route, Link } from "react-router-dom";
 import { AdminPropertyOverview } from "./property-overview";
-import { AdminPropertyStandards } from "./property-standards";
+import AdminPropertyStandards from "./property-standards";
 import { AdminPropertySuites } from "./property-suites";
 import { AdminPropertyBeds } from "./property-beds";
 import { AdminPropertyRoomtypes } from "./property-roomtypes";

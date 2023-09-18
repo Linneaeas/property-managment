@@ -148,15 +148,25 @@ a:hover {
 }
 
 .PropertyContainer {
+  position: absolute;
+  width: 100%;
   display: flex;
   justify-content: center;
 }
+
 .PropertyContent {
-  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #THTableHeadline,
 #TRTableHeadline {
-  padding: 1em;
   color: var(--darkBackground);
+}
+
+.PropertyTable th,
+.PropertyTable td {
+  text-align: left;
+  padding-left: 1rem;
 }
