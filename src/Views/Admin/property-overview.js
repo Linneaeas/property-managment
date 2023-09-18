@@ -4,7 +4,7 @@ export function AdminPropertyOverview() {
   return (
     <div className="PropertyContainer">
       <div className="PropertyContent">
-        <h2>Overview</h2>
+        <h1>Property Overview</h1>
       </div>
     </div>
   );

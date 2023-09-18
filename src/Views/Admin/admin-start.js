@@ -7,36 +7,76 @@ import { AdminPropertyBeds } from "./property-beds";
 import { AdminPropertyRoomtypes } from "./property-roomtypes";
 import { AdminPropertyProperties } from "./property-properties";
 import { AdminPropertyFacilities } from "./property-facilities";
+import React, { useState, useRef, useEffect } from "react";
 
 export function AdminStart({ Logout }) {
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const dropdownRef = useRef(null);
+  const toggleDropdown = () => {
+    setDropdownVisible(!dropdownVisible);
+  };
+
+  const handleLinkClick = () => {
+    setDropdownVisible(false);
+  };
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setDropdownVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className="AdminHeader">
       {Logout && <LogoutButton Logout={Logout} />}
       <div className="AdminNav">
-        <div className="Dropdown">
-          <button className="Link"> PROPERTY </button>
-          <div className="DropdownMenu">
+        <div className="Dropdown" ref={dropdownRef}>
+          <button className="Link" onClick={toggleDropdown}>
+            PROPERTY
+          </button>
+          <div className={`DropdownMenu ${dropdownVisible ? "visible" : ""}`}>
             <div className="DDOverview">
-              <Link to="/Overview">Overview</Link>
+              <Link to="/Overview" onClick={handleLinkClick}>
+                Overview
+              </Link>
             </div>
             <div className="DDLinks">
-              <Link to="/Standards">Standards</Link>
+              <Link to="/Standards" onClick={handleLinkClick}>
+                Standards
+              </Link>
             </div>
             <div className="DDLinks">
-              <Link to="/Suites">Suites</Link>
+              <Link to="/Suites" onClick={handleLinkClick}>
+                Suites
+              </Link>
             </div>
             <div className="DDLinks">
-              <Link to="/Beds">Beds</Link>
+              <Link to="/Beds" onClick={handleLinkClick}>
+                Beds
+              </Link>
             </div>
             <div className="DDLinks">
-              <Link to="/Roomtypes">Roomtypes</Link>
+              <Link to="/Roomtypes" onClick={handleLinkClick}>
+                Roomtypes
+              </Link>
             </div>
             <div className="DDLinks">
-              <Link to="/Properties">Properties</Link>
+              <Link to="/Properties" onClick={handleLinkClick}>
+                Properties
+              </Link>
             </div>
             <div className="DDLinks">
-              <Link to="/Facilities">Facilities</Link>
-            </div>{" "}
+              <Link to="/Facilities" onClick={handleLinkClick}>
+                Facilities
+              </Link>
+            </div>
           </div>
         </div>
         <div className="Dropdown">
