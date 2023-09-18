@@ -1,6 +1,7 @@
 import React from "react";
+import { useState, useEffect } from "react";
 
-const DataTable = ({ data }) => {
+const DataTable = ({ standards }) => {
   const handleEdit = (id) => {
     // Implement your edit logic here, using the item's ID
     console.log("Editing item with ID:", id);
@@ -8,17 +9,14 @@ const DataTable = ({ data }) => {
 
   return (
     <table className="PropertyTable">
-      <thead>
-        <tr id="TRTableHeadline">
-          <th id="THTableHeadline">EDIT:</th>
-          <th id="THTableHeadline">NAME:</th>
-        </tr>
-      </thead>
       <tbody>
-        {data.map((item) => (
+        {standards.map((item) => (
           <tr key={item.id}>
             <td id="EditBTNBox">
-              <button onClick={() => handleEdit(item.id)}>Edit</button>
+              <button
+                className="EditBTN"
+                onClick={() => handleEdit(item.id)}
+              ></button>
             </td>
             <td id="StandardNameBox">{item.standardName}</td>
           </tr>
@@ -29,16 +27,50 @@ const DataTable = ({ data }) => {
 };
 
 const AdminPropertyStandards = () => {
-  const data = [
-    { id: 1, standardName: "Standard 1" },
-    { id: 2, standardName: "Standard 2" },
-  ];
+  const [standards, setStandards] = useState([]);
+
+  const [showInput, setShowInput] = useState(false);
+  const [newStandardName, setNewStandardName] = useState("");
+
+  const handleAddButtonClick = () => {
+    setShowInput(true);
+  };
+
+  const handleAddStandard = () => {
+    if (newStandardName.trim() !== "") {
+      const newStandard = {
+        id: standards.length + 1,
+        standardName: newStandardName,
+      };
+      setStandards([...standards, newStandard]);
+      setNewStandardName("");
+      setShowInput(false);
+    }
+  };
 
   return (
     <div className="PropertyContainer">
       <div className="PropertyContent">
         <h1>PROPERTY STANDARDS</h1>
-        <DataTable data={data} />
+        <DataTable standards={standards} />
+        {!showInput && (
+          <button className="AddBTN" onClick={handleAddButtonClick}>
+            Add
+          </button>
+        )}
+        {showInput && (
+          <div>
+            <input
+              type="text"
+              value={newStandardName}
+              onChange={(e) => setNewStandardName(e.target.value)}
+              placeholder="Enter standard name"
+            />
+            <button className="SaveBTN" onClick={handleAddStandard}>
+              Save
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

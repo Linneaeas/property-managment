@@ -62,13 +62,34 @@ a:hover {
 /*LOGIN VIEW*/
 .LoginBTN {
   background-color: var(--darkBackground);
-  font-family: Quicksand;
+  font-family: inherit;
   font-size: 20px;
   color: var(--white);
   padding: 0.5rem;
   border: none;
   border-radius: 25px;
 }
+
+.EditBTN {
+  background-image: url("Images/EditBTN.png");
+  background-size: cover;
+  width: 20px;
+  aspect-ratio: 1;
+  cursor: pointer;
+  border: none;
+}
+
+.AddBTN,
+.SaveBTN {
+  background-color: var(--darkBackground);
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--white);
+  padding: 0.25rem;
+  border: none;
+  border-radius: 25px;
+}
+
 .StartPageHeader,
 .Form {
   display: flex;
@@ -90,7 +111,8 @@ a:hover {
 #LoginLabel {
   color: var(--darkText);
 }
-#LoginInput {
+input[type="text"],
+[type="password"] {
   background: rgb(196, 96, 149, 0.4);
   border-radius: 25px;
   border: none;
@@ -145,6 +167,7 @@ a:hover {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
+  z-index: 1;
 }
 
 .PropertyContainer {
@@ -160,11 +183,9 @@ a:hover {
   align-items: center;
 }
 
-#THTableHeadline,
-#TRTableHeadline {
-  color: var(--darkBackground);
+.PropertyTable {
+  margin-bottom: 1em;
 }
-
 .PropertyTable th,
 .PropertyTable td {
   text-align: left;

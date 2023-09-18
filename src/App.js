@@ -28,7 +28,7 @@ function App() {
   };
 
   const Logout = () => {
-    setUser({ name: "" });
+    setUser({ username: "" });
     setIsAdmin(false);
     setError("");
   };
