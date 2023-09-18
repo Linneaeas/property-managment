@@ -49,7 +49,7 @@ a {
 }
 
 button:hover,
-#LogoutButton:hover,
+.LogoutBTN:hover,
 a:hover {
   color: var(--darkerHover);
 }
@@ -57,6 +57,11 @@ button:hover,
 input:hover,
 a:hover {
   cursor: pointer;
+}
+
+#saveOrDeleteBTNBox {
+  display: flex;
+  gap: 0.5rem;
 }
 
 /*LOGIN VIEW*/
@@ -70,6 +75,16 @@ a:hover {
   border-radius: 25px;
 }
 
+.AddBTN,
+#AddSaveBTN {
+  background-image: url("Images/AddBTN.png");
+  background-size: cover;
+  width: 40px;
+  aspect-ratio: 1;
+  cursor: pointer;
+  border: none;
+}
+
 .EditBTN {
   background-image: url("Images/EditBTN.png");
   background-size: cover;
@@ -79,15 +94,31 @@ a:hover {
   border: none;
 }
 
-.AddBTN,
 .SaveBTN {
-  background-color: var(--darkBackground);
-  font-family: inherit;
-  font-size: 15px;
-  color: var(--white);
-  padding: 0.25rem;
+  background-image: url("Images/SaveBTN.png");
+  background-size: cover;
+  width: 25px;
+  aspect-ratio: 1;
+  cursor: pointer;
   border: none;
-  border-radius: 25px;
+}
+
+.DeleteBTN {
+  background-image: url("Images/DeleteBTN.png");
+  background-size: cover;
+  width: 25px;
+  aspect-ratio: 1;
+  cursor: pointer;
+  border: none;
+}
+
+.CancelBTN {
+  background-image: url("Images/CancelBTN.png");
+  background-size: cover;
+  width: 25px;
+  aspect-ratio: 1;
+  cursor: pointer;
+  border: none;
 }
 
 .StartPageHeader,
@@ -117,6 +148,10 @@ input[type="text"],
   border-radius: 25px;
   border: none;
   height: 30px;
+}
+
+.AddContent {
+  display: flex;
 }
 
 /*ADMIN VIEW*/
