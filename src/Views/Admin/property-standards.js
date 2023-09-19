@@ -6,6 +6,11 @@ import {
   DeleteButton,
 } from "../../Components/buttons";
 import OutsideClickListener from "../../Components/event-listeners";
+import {
+  saveStandardsToLocalStorage,
+  getStandardsFromLocalStorage,
+} from "../../Components/local-storage";
+
 // DataTable component renders a table with rows based on standards data:
 export function DataTable({
   standards,
@@ -71,7 +76,9 @@ export function DataTable({
 
 // AdminPropertyStandards component for managing property standards
 export function AdminPropertyStandards() {
-  const [standards, setStandards] = useState([]); // State for property standards
+  const [standards, setStandards] = useState(
+    getStandardsFromLocalStorage() || []
+  );
   const [showInput, setShowInput] = useState(false); // State for input visibility
   const [newStandardName, setNewStandardName] = useState(""); // State for new standard name
   const [isAddingNewStandard, setIsAddingNewStandard] = useState(false); // Define isAddingNewStandard
@@ -95,10 +102,12 @@ export function AdminPropertyStandards() {
         isEditing: false,
         editedName: "",
       };
-      setStandards((prevStandards) => [...prevStandards, newStandard]); //This line updates the standards state using the setStandards function. It creates a new array that includes all the previous standards (prevStandards) using the spread operator (...), and appends the newStandard to the end of the array. This effectively adds the new standard to the list of standards.
-      setNewStandardName(""); //This resets the newStandardName state to an empty string, effectively clearing the input field after adding a new standard.
-      setShowInput(false); //his hides the input field by setting showInput state to false.
-      setIsAddingNewStandard(false); //resets isAddingNewStandard to false, indicating that the process of adding a new standard is complete.
+      const updatedStandards = [...standards, newStandard];
+      setStandards(updatedStandards);
+      saveStandardsToLocalStorage(updatedStandards); // Save to local storage
+      setNewStandardName("");
+      setShowInput(false);
+      setIsAddingNewStandard(false);
     }
   };
 
@@ -113,7 +122,7 @@ export function AdminPropertyStandards() {
   const handleEdit = (id) => {
     const updatedStandards = standards.map((item) => {
       if (item.id === id) {
-        setIsEditingStandard(true); // Update isEditingStandard
+        setIsEditingStandard(true);
         return {
           ...item,
           isEditing: !item.isEditing,
@@ -123,24 +132,27 @@ export function AdminPropertyStandards() {
       return { ...item, isEditing: false };
     });
     setStandards(updatedStandards);
+    saveStandardsToLocalStorage(updatedStandards); // Save to local storage
   };
 
   // Handler for saving changes to a standard:
   const handleSave = (id) => {
     const updatedStandards = standards.map((item) => {
       if (item.id === id) {
-        setIsEditingStandard(false); // Update isEditingStandard
+        setIsEditingStandard(false);
         return { ...item, isEditing: false, standardName: item.editedName };
       }
       return item;
     });
     setStandards(updatedStandards);
+    saveStandardsToLocalStorage(updatedStandards); // Save to local storage
   };
 
   // Handler for deleting a standard:
   const handleDelete = (id) => {
     const updatedStandards = standards.filter((item) => item.id !== id);
     setStandards(updatedStandards);
+    saveStandardsToLocalStorage(updatedStandards); // Save to local storage
   };
 
   // Handler for outside click to handle editing and adding states:
@@ -184,9 +196,9 @@ export function AdminPropertyStandards() {
                 placeholder="Enter standard name"
                 onClick={(e) => {
                   e.stopPropagation();
-                  setIsAddingNewStandard(true); // Set isAddingNewStandard to true when clicking inside the input
+                  setIsAddingNewStandard(true);
                 }}
-                onFocus={(e) => e.stopPropagation()} // Prevent onFocus from propagating
+                onFocus={(e) => e.stopPropagation()}
               />
               <SaveButton onSave={handleAddStandard} />
             </div>
