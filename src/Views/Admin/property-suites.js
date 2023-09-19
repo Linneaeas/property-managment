@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   saveSuitesToLocalStorage,
   getSuitesFromLocalStorage,
+  getStandardsFromLocalStorage,
 } from "../../Components/local-storage";
 import {
   EditButton,
@@ -13,6 +14,7 @@ import OutsideClickListener from "../../Components/event-listeners";
 
 export function DataTable({
   suites,
+  standards, // Receive standards as a prop
   onEdit,
   onDelete,
   onSave,
@@ -48,6 +50,14 @@ export function DataTable({
                 item.suiteName
               )}
             </td>
+            <td id="suitesStandardBox">
+              <input list="standardOptions" />
+              <datalist id="standardOptions">
+                {standards.map((standard) => (
+                  <option key={standard.id} value={standard.standardName} />
+                ))}
+              </datalist>
+            </td>
             <td id="saveOrDeleteBTNBox">
               {item.isEditing && (
                 <>
@@ -69,7 +79,13 @@ export function AdminPropertySuites() {
   const [newSuiteName, setNewSuiteName] = useState("");
   const [isAddingNewSuite, setIsAddingNewSuite] = useState(false);
   const [isEditingSuite, setIsEditingSuite] = useState(false);
-
+  const [standards, setStandards] = useState([]);
+  useEffect(() => {
+    const savedStandards = getStandardsFromLocalStorage();
+    if (savedStandards) {
+      setStandards(savedStandards);
+    }
+  }, []);
   const handleAddButtonClick = () => {
     setNewSuiteName("");
     setShowInput(true);
@@ -149,6 +165,7 @@ export function AdminPropertySuites() {
           <h1>PROPERTY SUITES</h1>
           <DataTable
             suites={suites}
+            standards={standards} // Pass the standards here
             onEdit={handleEdit}
             onSave={handleSave}
             onDelete={handleDelete}
@@ -177,9 +194,3 @@ export function AdminPropertySuites() {
     </div>
   );
 }
-
-/*<input list="standardOptions" /><datalist id="standardOptions">
-{standards.map((standard) => (
-  <option key={standard.id} value={standard.standardName} />
-))}
-</datalist> */
