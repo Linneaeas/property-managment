@@ -26,6 +26,14 @@ export function DataTable({
 }) {
   return (
     <table className="PropertyTable">
+      <thead>
+        <tr>
+          <th></th>
+          <th className="ColHeadline">NAME:</th>
+          <th className="ColHeadline">STANDARD:</th>
+          <th></th>
+        </tr>
+      </thead>
       <tbody>
         {suites.map((item) => (
           <tr key={item.id}>

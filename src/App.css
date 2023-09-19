@@ -13,7 +13,9 @@ body {
 }
 
 h1,
-h2 {
+h2,
+h3,
+h4 {
   color: var(--darkBackground);
 }
 
@@ -149,8 +151,6 @@ input[type="text"],
   display: flex;
 }
 
-/*ADMIN VIEW*/
-
 .AdminHeader {
   background-color: var(--darkBackground);
 }
@@ -216,8 +216,13 @@ input[type="text"],
 .PropertyTable {
   margin-bottom: 1em;
 }
-.PropertyTable th,
-.PropertyTable td {
+
+.PropertyTable td,
+th {
   text-align: left;
   padding-left: 1rem;
+}
+
+.ColHeadline {
+  color: var(--darkBackground);
 }
