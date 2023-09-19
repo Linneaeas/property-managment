@@ -80,11 +80,13 @@ export function AdminPropertyStandards() {
   // Handler for add button click:
   const handleAddButtonClick = () => {
     setNewStandardName(""); // Reset new standard name when clicking add
-    setShowInput(true);
+    setShowInput(true); //Displaying Inputfield
     setIsAddingNewStandard(true); // Set isAddingNewStandard to true when starting to add
   };
 
   // Handler for adding a new standard:
+  //if (newStandardName.trim() !== ""): This condition checks if the trimmed newStandardName (removing whitespace from the start and end) is not an empty string. It ensures that you're trying to add a standard only if the input is not empty or contains only whitespace.
+  //const newStandard = { ... }: If the condition is met, a new newStandard object is created. This object represents the new standard you want to add. It contains properties like id (based on the length of the existing standards array plus 1), standardName (from the input), isEditing (initially set to false), and editedName (initially an empty string).
   const handleAddStandard = () => {
     if (newStandardName.trim() !== "") {
       const newStandard = {
@@ -93,14 +95,21 @@ export function AdminPropertyStandards() {
         isEditing: false,
         editedName: "",
       };
-      setStandards((prevStandards) => [...prevStandards, newStandard]);
-      setNewStandardName("");
-      setShowInput(false);
-      setIsAddingNewStandard(false); // Reset isAddingNewStandard when adding is complete
+      setStandards((prevStandards) => [...prevStandards, newStandard]); //This line updates the standards state using the setStandards function. It creates a new array that includes all the previous standards (prevStandards) using the spread operator (...), and appends the newStandard to the end of the array. This effectively adds the new standard to the list of standards.
+      setNewStandardName(""); //This resets the newStandardName state to an empty string, effectively clearing the input field after adding a new standard.
+      setShowInput(false); //his hides the input field by setting showInput state to false.
+      setIsAddingNewStandard(false); //resets isAddingNewStandard to false, indicating that the process of adding a new standard is complete.
     }
   };
 
   // Handler for editing a standard
+  //const handleEdit = (id) => { ... }: This is an arrow function named handleEdit that takes an id as an argument. This function is intended to handle the editing of a standard.
+  //const updatedStandards = standards.map((item) => { ... }): This line creates a new array called updatedStandards by mapping over the standards array. The purpose is to create a new array with updated information about each standard.
+  //if (item.id === id) { ... }: This condition checks if the id of the current item matches the provided id. If they match, it means this is the standard to be edited.
+  //setIsEditingStandard(true);: This sets the isEditingStandard state to true, indicating that you are in the process of editing a standard.
+  //return { ...item, isEditing: !item.isEditing, editedName: item.standardName };: This returns a new object representing the updated version of the current standard. It uses the spread operator (...) to copy all properties of the item. It toggles the isEditing property (using !item.isEditing) to switch between editing and not editing, and it sets editedName to the current standardName.
+  //return { ...item, isEditing: false };: If the condition in step 3 is not met, meaning this is not the standard to be edited, this returns a new object with the same properties as the item but with isEditing set to false
+  //setStandards(updatedStandards);: Finally, this updates the standards state using the setStandards function, replacing the existing standards with the updatedStandards.
   const handleEdit = (id) => {
     const updatedStandards = standards.map((item) => {
       if (item.id === id) {
