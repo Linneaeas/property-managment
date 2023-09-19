@@ -1,17 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { AdminStart } from "./admin-start";
 import { getStandardsFromLocalStorage } from "../../Components/local-storage";
+import { getSuitesFromLocalStorage } from "../../Components/local-storage";
 
 export function AdminPropertyOverview() {
   const [standards, setStandards] = useState([]);
+  const [suites, setSuites] = useState([]);
 
   useEffect(() => {
-    // Load standards from local storage when the component mounts
     const savedStandards = getStandardsFromLocalStorage();
     if (savedStandards) {
       setStandards(savedStandards);
     }
-  }, []); // Empty dependency array ensures this effect runs once on component mount
+  }, []);
+
+  useEffect(() => {
+    const savedSuites = getSuitesFromLocalStorage();
+    if (savedSuites) {
+      setSuites(savedSuites);
+    }
+  }, []);
 
   return (
     <div className="PropertyContainer">
@@ -23,6 +31,22 @@ export function AdminPropertyOverview() {
             <li key={standard.id}>{standard.standardName}</li>
           ))}
         </ul>
+
+        <h2>Property suites:</h2>
+        <table className="PropertyTable">
+          <thead>
+            <tr>
+              <th className="ColHeadline">Suite name:</th>
+              <th className="ColHeadline">Suite standard:</th>
+            </tr>
+          </thead>
+          {suites.map((suite) => (
+            <tr key={suite.id}>
+              <td>{suite.suiteName}</td>
+              <td>{suite.selectedStandard}</td>
+            </tr>
+          ))}
+        </table>
       </div>
     </div>
   );

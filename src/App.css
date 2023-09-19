@@ -226,3 +226,8 @@ th {
 .ColHeadline {
   color: var(--darkBackground);
 }
+
+ul {
+  list-style: none;
+  gap: 1em;
+}
