@@ -4,8 +4,8 @@ import {
   EditButton,
   SaveButton,
   DeleteButton,
-  CancelButton,
 } from "../../Components/buttons";
+import OutsideClickListener from "../../Components/event-listeners";
 
 export function DataTable({
   standards,
@@ -13,17 +13,10 @@ export function DataTable({
   onDelete,
   onSave,
   setStandards,
+  isAddingNewStandard,
+  isEditingStandard,
+  handleOutsideClick,
 }) {
-  const handleCancel = (id) => {
-    const updatedStandards = standards.map((item) => {
-      if (item.id === id) {
-        return { ...item, isEditing: false, editedName: item.standardName };
-      }
-      return item;
-    });
-    setStandards(updatedStandards);
-  };
-
   return (
     <table className="PropertyTable">
       <tbody>
@@ -33,32 +26,35 @@ export function DataTable({
               <EditButton onEdit={() => onEdit(item.id)} />
             </td>
             <td id="standardNameBox">
+              {" "}
+              {/* Remove whitespace here */}
               {item.isEditing ? (
                 <input
                   type="text"
                   value={item.editedName}
                   onChange={(e) => {
-                    const updatedStandards = standards.map((standard) => {
-                      if (standard.id === item.id) {
-                        return { ...standard, editedName: e.target.value };
-                      }
-                      return standard;
-                    });
+                    const updatedStandards = standards.map((standard) =>
+                      standard.id === item.id
+                        ? { ...standard, editedName: e.target.value }
+                        : standard
+                    );
                     setStandards(updatedStandards);
                   }}
+                  onClick={(e) => e.stopPropagation()}
                 />
               ) : (
                 item.standardName
               )}
             </td>
             <td id="saveOrDeleteBTNBox">
-              {item.isEditing ? (
-                <React.Fragment>
-                  <CancelButton onCancel={() => handleCancel(item.id)} />
+              {" "}
+              {/* Remove whitespace here */}
+              {item.isEditing && (
+                <>
                   <DeleteButton onDelete={() => onDelete(item.id)} />
                   <SaveButton onSave={() => onSave(item.id)} />
-                </React.Fragment>
-              ) : null}
+                </>
+              )}
             </td>
           </tr>
         ))}
@@ -71,9 +67,13 @@ export function AdminPropertyStandards() {
   const [standards, setStandards] = useState([]);
   const [showInput, setShowInput] = useState(false);
   const [newStandardName, setNewStandardName] = useState("");
+  const [isAddingNewStandard, setIsAddingNewStandard] = useState(false); // Define isAddingNewStandard
+  const [isEditingStandard, setIsEditingStandard] = useState(false); // Define isEditingStandard
 
   const handleAddButtonClick = () => {
+    setNewStandardName(""); // Reset new standard name when clicking add
     setShowInput(true);
+    setIsAddingNewStandard(true); // Set isAddingNewStandard to true when starting to add
   };
 
   const handleAddStandard = () => {
@@ -84,28 +84,24 @@ export function AdminPropertyStandards() {
         isEditing: false,
         editedName: "",
       };
-      setStandards([...standards, newStandard]);
+      setStandards((prevStandards) => [...prevStandards, newStandard]);
       setNewStandardName("");
       setShowInput(false);
+      setIsAddingNewStandard(false); // Reset isAddingNewStandard when adding is complete
     }
   };
 
   const handleEdit = (id) => {
     const updatedStandards = standards.map((item) => {
       if (item.id === id) {
-        return { ...item, isEditing: true, editedName: item.standardName };
+        setIsEditingStandard(true); // Update isEditingStandard
+        return {
+          ...item,
+          isEditing: !item.isEditing,
+          editedName: item.standardName,
+        };
       }
       return { ...item, isEditing: false };
-    });
-    setStandards(updatedStandards);
-  };
-
-  const handleCancel = (id) => {
-    const updatedStandards = standards.map((item) => {
-      if (item.id === id) {
-        return { ...item, isEditing: false, editedName: item.standardName };
-      }
-      return item;
     });
     setStandards(updatedStandards);
   };
@@ -113,6 +109,7 @@ export function AdminPropertyStandards() {
   const handleSave = (id) => {
     const updatedStandards = standards.map((item) => {
       if (item.id === id) {
+        setIsEditingStandard(false); // Update isEditingStandard
         return { ...item, isEditing: false, standardName: item.editedName };
       }
       return item;
@@ -125,30 +122,54 @@ export function AdminPropertyStandards() {
     setStandards(updatedStandards);
   };
 
+  const handleOutsideClick = () => {
+    if (isAddingNewStandard && !isEditingStandard) {
+      setIsAddingNewStandard(false);
+      setShowInput(false);
+    }
+
+    if (isEditingStandard) {
+      const updatedStandards = standards.map((item) => ({
+        ...item,
+        isEditing: false,
+      }));
+      setStandards(updatedStandards);
+      setIsEditingStandard(false);
+    }
+  };
+
   return (
     <div className="PropertyContainer">
-      <div className="PropertyContent">
-        <h1>PROPERTY STANDARDS</h1>
-        <DataTable
-          standards={standards}
-          onEdit={handleEdit}
-          onSave={handleSave}
-          onDelete={handleDelete}
-          setStandards={setStandards}
-        />
-        {!showInput && <AddButton onAdd={handleAddButtonClick} />}
-        {showInput && (
-          <div className="AddContent">
-            <input
-              type="text"
-              value={newStandardName}
-              onChange={(e) => setNewStandardName(e.target.value)}
-              placeholder="Enter standard name"
-            />
-            <SaveButton onSave={handleAddStandard} />
-          </div>
-        )}
-      </div>
+      <OutsideClickListener onOutsideClick={handleOutsideClick}>
+        <div className="PropertyContent">
+          <h1>PROPERTY STANDARDS</h1>
+          <DataTable
+            standards={standards}
+            onEdit={handleEdit}
+            onSave={handleSave}
+            onDelete={handleDelete}
+            setStandards={setStandards}
+            handleOutsideClick={handleOutsideClick}
+          />
+          {!showInput && <AddButton onAdd={handleAddButtonClick} />}
+          {showInput && (
+            <div className="AddContent">
+              <input
+                type="text"
+                value={newStandardName}
+                onChange={(e) => setNewStandardName(e.target.value)}
+                placeholder="Enter standard name"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsAddingNewStandard(true); // Set isAddingNewStandard to true when clicking inside the input
+                }}
+                onFocus={(e) => e.stopPropagation()} // Prevent onFocus from propagating
+              />
+              <SaveButton onSave={handleAddStandard} />
+            </div>
+          )}
+        </div>
+      </OutsideClickListener>
     </div>
   );
 }

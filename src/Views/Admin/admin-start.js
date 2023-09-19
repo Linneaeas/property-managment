@@ -7,91 +7,92 @@ import { AdminPropertyBeds } from "./property-beds";
 import { AdminPropertyRoomtypes } from "./property-roomtypes";
 import { AdminPropertyProperties } from "./property-properties";
 import { AdminPropertyFacilities } from "./property-facilities";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
+import OutsideClickListener from "../../Components/event-listeners";
 
 export function AdminStart({ Logout }) {
-  const [dropdownVisible, setDropdownVisible] = useState(false);
-  const dropdownRef = useRef(null);
+  const [dropdownVisible, setDropdownVisible] = useState(false); //State to manage the visibility of the dropdown menu
+  const dropdownRef = useRef(null); // Reference to the dropdown menu element-useRef is a hook that provides a way to create mutable object properties that persist across renders. It allows you to create a reference to a DOM element or any other value and ensures that the reference remains consistent across renders.
+
   const toggleDropdown = () => {
-    setDropdownVisible(!dropdownVisible);
+    setDropdownVisible(!dropdownVisible); // Toggle the visibility of the dropdown menu, ! makes it turn the opposite of the current value
   };
 
   const handleLinkClick = () => {
-    setDropdownVisible(false);
+    setDropdownVisible(false); // Handle link click to close the dropdown menu- set the value to be false no matter original value.
   };
 
-  const handleClickOutside = (event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setDropdownVisible(false);
-    }
+  const handleOutsideClick = () => {
+    setDropdownVisible(false); // Handle outside click to close the dropdown menu
   };
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
 
   return (
     <div className="AdminHeader">
-      {Logout && <LogoutButton Logout={Logout} />}
-      <div className="AdminNav">
-        <div className="Dropdown" ref={dropdownRef}>
-          <button className="Link" onClick={toggleDropdown}>
-            PROPERTY
-          </button>
-          <div className={`DropdownMenu ${dropdownVisible ? "visible" : ""}`}>
-            <div className="DDOverview">
-              <Link to="/Overview" onClick={handleLinkClick}>
-                Overview
-              </Link>
-            </div>
-            <div className="DDLinks">
-              <Link to="/Standards" onClick={handleLinkClick}>
-                Standards
-              </Link>
-            </div>
-            <div className="DDLinks">
-              <Link to="/Suites" onClick={handleLinkClick}>
-                Suites
-              </Link>
-            </div>
-            <div className="DDLinks">
-              <Link to="/Beds" onClick={handleLinkClick}>
-                Beds
-              </Link>
-            </div>
-            <div className="DDLinks">
-              <Link to="/Roomtypes" onClick={handleLinkClick}>
-                Roomtypes
-              </Link>
-            </div>
-            <div className="DDLinks">
-              <Link to="/Properties" onClick={handleLinkClick}>
-                Properties
-              </Link>
-            </div>
-            <div className="DDLinks">
-              <Link to="/Facilities" onClick={handleLinkClick}>
-                Facilities
-              </Link>
+      <OutsideClickListener onOutsideClick={handleOutsideClick}>
+        {" "}
+        {/*Call OutsideClickListener to handle outside clicks */}
+        {Logout && <LogoutButton Logout={Logout} />}
+        <div className="AdminNav">
+          <div className="Dropdown" ref={dropdownRef}>
+            <button className="Link" onClick={toggleDropdown}>
+              PROPERTY
+            </button>
+            <div className={`DropdownMenu ${dropdownVisible ? "visible" : ""}`}>
+              {/*dropdownVisible is the condition.
+             "visible" is the value if dropdownVisible is true.
+            "" is the value if dropdownVisible is false (an empty string).
+             So, if dropdownVisible is true, it adds the class "visible" to the DropdownMenu component; otherwise, it doesn't add any class (empty string).*/}
+              <div className="DDOverview">
+                <Link to="/Overview" onClick={handleLinkClick}>
+                  Overview
+                </Link>
+              </div>
+              <div className="DDLinks">
+                <Link to="/Standards" onClick={handleLinkClick}>
+                  Standards
+                </Link>
+              </div>
+              <div className="DDLinks">
+                <Link to="/Suites" onClick={handleLinkClick}>
+                  Suites
+                </Link>
+              </div>
+              <div className="DDLinks">
+                <Link to="/Beds" onClick={handleLinkClick}>
+                  Beds
+                </Link>
+              </div>
+              <div className="DDLinks">
+                <Link to="/Roomtypes" onClick={handleLinkClick}>
+                  Roomtypes
+                </Link>
+              </div>
+              <div className="DDLinks">
+                <Link to="/Properties" onClick={handleLinkClick}>
+                  Properties
+                </Link>
+              </div>
+              <div className="DDLinks">
+                <Link to="/Facilities" onClick={handleLinkClick}>
+                  Facilities
+                </Link>
+              </div>
             </div>
           </div>
+          <div className="Dropdown">
+            <button className="Link"> REVENUE </button>
+          </div>
+          <div className="Dropdown">
+            <button className="Link"> FINANCIAL </button>
+          </div>
+          <div className="Dropdown">
+            <button className="Link"> ADVANCED </button>
+          </div>
+          <div className="Dropdown">
+            <button className="Link"> MISCELLANIOUS </button>
+          </div>
         </div>
-        <div className="Dropdown">
-          <button className="Link"> REVENUE </button>
-        </div>
-        <div className="Dropdown">
-          <button className="Link"> FINANCIAL </button>
-        </div>
-        <div className="Dropdown">
-          <button className="Link"> ADVANCED </button>
-        </div>
-        <div className="Dropdown">
-          <button className="Link"> MISCELLANIOUS </button>
-        </div>
-      </div>
+      </OutsideClickListener>
       <Routes>
         <Route path="/Overview" element={<AdminPropertyOverview />} />
         <Route path="/Standards" element={<AdminPropertyStandards />} />

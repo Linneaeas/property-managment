@@ -45,15 +45,3 @@ export function DeleteButton({ onDelete }) {
     </div>
   );
 }
-
-export function CancelButton({ onCancel }) {
-  return (
-    <div>
-      <button
-        className="CancelBTN"
-        id="CancelButton"
-        onClick={onCancel}
-      ></button>
-    </div>
-  );
-}
