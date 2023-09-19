@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { getStandardsFromLocalStorage } from "../../Components/local-storage";
+import {
+  getStandardsFromLocalStorage,
+  saveSuitesToLocalStorage,
+  getSuitesFromLocalStorage,
+} from "../../Components/local-storage";
 
 export function AdminPropertySuites() {
   const [standards, setStandards] = useState([]);
@@ -13,13 +17,13 @@ export function AdminPropertySuites() {
     <div className="PropertyContainer">
       <div className="PropertyContent">
         <h1>SUITES</h1>
-        <input list="standardOptions" />
-        <datalist id="standardOptions">
-          {standards.map((standard) => (
-            <option key={standard.id} value={standard.standardName} />
-          ))}
-        </datalist>
       </div>
     </div>
   );
 }
+
+/*<input list="standardOptions" /><datalist id="standardOptions">
+{standards.map((standard) => (
+  <option key={standard.id} value={standard.standardName} />
+))}
+</datalist> */
