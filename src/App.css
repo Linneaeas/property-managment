@@ -135,6 +135,8 @@ a:hover {
 #LoginLabel {
   color: var(--darkText);
 }
+
+select,
 input[type="text"],
 [type="password"] {
   background: rgb(196, 96, 149, 0.4);

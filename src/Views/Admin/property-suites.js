@@ -14,7 +14,7 @@ import OutsideClickListener from "../../Components/event-listeners";
 
 export function DataTable({
   suites,
-  standards, // Receive standards as a prop
+  standards,
   onEdit,
   onDelete,
   onSave,
@@ -22,6 +22,7 @@ export function DataTable({
   isAddingNewSuite,
   isEditingSuite,
   handleOutsideClick,
+  newSuite,
 }) {
   return (
     <table className="PropertyTable">
@@ -31,7 +32,7 @@ export function DataTable({
             <td id="editBTNBox">
               <EditButton onEdit={() => onEdit(item.id)} />
             </td>
-            <td id="suitesNameBox">
+            <td>
               {item.isEditing ? (
                 <input
                   type="text"
@@ -51,12 +52,30 @@ export function DataTable({
               )}
             </td>
             <td id="suitesStandardBox">
-              <input list="standardOptions" />
-              <datalist id="standardOptions">
-                {standards.map((standard) => (
-                  <option key={standard.id} value={standard.standardName} />
-                ))}
-              </datalist>
+              {item.isEditing ? (
+                <div className="inputWithDatalist">
+                  <select
+                    value={item.selectedStandard}
+                    onChange={(e) => {
+                      const updatedSuites = suites.map((suite) =>
+                        suite.id === item.id
+                          ? { ...suite, selectedStandard: e.target.value }
+                          : suite
+                      );
+                      setSuites(updatedSuites);
+                    }}
+                  >
+                    <option value="">Select a standard</option>
+                    {standards.map((standard) => (
+                      <option key={standard.id} value={standard.standardName}>
+                        {standard.standardName}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              ) : (
+                item.selectedStandard || "N/A"
+              )}
             </td>
             <td id="saveOrDeleteBTNBox">
               {item.isEditing && (
@@ -87,27 +106,56 @@ export function AdminPropertySuites() {
     }
   }, []);
   const handleAddButtonClick = () => {
+    const newSuite = {
+      id: suites.length + 1,
+      suiteName: "",
+      isEditing: false,
+      editedName: "",
+      selectedStandard: "", // Initialize with an empty string
+    };
+
+    setNewSuite(newSuite);
     setNewSuiteName("");
     setShowInput(true);
     setIsAddingNewSuite(true);
   };
 
   const handleAddSuite = () => {
-    if (newSuiteName.trim() !== "") {
-      const newSuite = {
-        id: suites.length + 1,
+    const selectedStandard = newSuite.selectedStandard;
+    const uniqueId = new Date().getTime(); // Generate a unique ID using timestamp
+    if (newSuiteName.trim() !== "" && selectedStandard.trim() !== "") {
+      const newSuiteToAdd = {
+        id: uniqueId, // Use the unique ID
         suiteName: newSuiteName,
         isEditing: false,
         editedName: "",
+        selectedStandard: selectedStandard,
       };
-      const updatedSuites = [...suites, newSuite];
+      const updatedSuites = [...suites, newSuiteToAdd];
       setSuites(updatedSuites);
       saveSuitesToLocalStorage(updatedSuites);
-      setNewSuiteName("");
+      setNewSuite({
+        // Reset newSuite to its initial state
+        id: uniqueId, // Reset newSuite with the unique ID
+        suiteName: "",
+        isEditing: false,
+        editedName: "",
+        selectedStandard: "",
+      });
       setShowInput(false);
       setIsAddingNewSuite(false);
+    } else {
+      alert("Please enter a suite name and select a standard.");
     }
   };
+
+  const [newSuite, setNewSuite] = useState({
+    id: suites.length + 1,
+    suiteName: newSuiteName,
+    isEditing: false,
+    editedName: "",
+    selectedStandard: "", // Initialize selectedStandard
+  });
 
   const handleEdit = (id) => {
     const updatedSuites = suites.map((item) => {
@@ -121,15 +169,27 @@ export function AdminPropertySuites() {
       }
       return { ...item, isEditing: false };
     });
+
+    // Find the edited suite to pass to DataTable
+    const editedSuite = updatedSuites.find((item) => item.id === id);
+    setNewSuite(editedSuite); // Pass the edited suite to newSuite
+
     setSuites(updatedSuites);
     saveSuitesToLocalStorage(updatedSuites);
   };
 
   const handleSave = (id) => {
+    const uniqueId = new Date().getTime();
     const updatedSuites = suites.map((item) => {
       if (item.id === id) {
         setIsEditingSuite(false);
-        return { ...item, isEditing: false, suiteName: item.editedName };
+        return {
+          ...item,
+          isEditing: false,
+          suiteName: item.editedName,
+          selectedStandard: item.selectedStandard, // Include the selected standard
+          id: uniqueId,
+        };
       }
       return item;
     });
@@ -165,12 +225,15 @@ export function AdminPropertySuites() {
           <h1>PROPERTY SUITES</h1>
           <DataTable
             suites={suites}
-            standards={standards} // Pass the standards here
+            standards={standards}
             onEdit={handleEdit}
             onSave={handleSave}
             onDelete={handleDelete}
             setSuites={setSuites}
+            isAddingNewSuite={isAddingNewSuite} // Pass the isAddingNewSuite prop
+            isEditingSuite={isEditingSuite} // Pass the isEditingSuite prop
             handleOutsideClick={handleOutsideClick}
+            newSuite={newSuite}
           />
           {!showInput && <AddButton onAdd={handleAddButtonClick} />}
           {showInput && (
@@ -186,6 +249,25 @@ export function AdminPropertySuites() {
                 }}
                 onFocus={(e) => e.stopPropagation()}
               />
+
+              <select
+                value={newSuite.selectedStandard}
+                onChange={(e) => {
+                  const updatedNewSuite = {
+                    ...newSuite,
+                    selectedStandard: e.target.value,
+                  };
+                  setNewSuite(updatedNewSuite);
+                }}
+              >
+                <option value="">Select a standard</option>
+                {standards.map((standard) => (
+                  <option key={standard.id} value={standard.standardName}>
+                    {standard.standardName}
+                  </option>
+                ))}
+              </select>
+
               <SaveButton onSave={handleAddSuite} />
             </div>
           )}
