@@ -35,12 +35,22 @@ export function SaveButton({ onSave }) {
 }
 
 export function DeleteButton({ onDelete }) {
+  const handleDelete = () => {
+    if (
+      window.confirm(
+        "This action is non-reversible! Are you sure you want to delete this item?"
+      )
+    ) {
+      onDelete();
+    }
+  };
+
   return (
     <div>
       <button
         className="DeleteBTN"
         id="DeleteButton"
-        onClick={onDelete}
+        onClick={handleDelete}
       ></button>
     </div>
   );

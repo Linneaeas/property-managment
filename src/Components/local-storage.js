@@ -41,3 +41,45 @@ export const getSuitesFromLocalStorage = () => {
     return undefined;
   }
 };
+// BEDS
+export const saveBedsToLocalStorage = (beds) => {
+  try {
+    const serializedBeds = JSON.stringify(beds);
+    localStorage.setItem("beds", serializedBeds);
+  } catch (error) {
+    console.error("Error saving beds to local storage:", error);
+  }
+};
+export const getBedsFromLocalStorage = () => {
+  try {
+    const serializedBeds = localStorage.getItem("beds");
+    if (serializedBeds === null) {
+      return undefined;
+    }
+    return JSON.parse(serializedBeds);
+  } catch (error) {
+    console.error("Error getting beds from local storage:", error);
+    return undefined;
+  }
+};
+// ADDITIONAL BEDS
+export const saveAddBedsToLocalStorage = (addBeds) => {
+  try {
+    const serializedAddBeds = JSON.stringify(addBeds);
+    localStorage.setItem("addBeds", serializedAddBeds);
+  } catch (error) {
+    console.error("Error saving add beds to local storage:", error);
+  }
+};
+export const getAddBedsFromLocalStorage = () => {
+  try {
+    const serializedAddBeds = localStorage.getItem("addBeds");
+    if (serializedAddBeds === null) {
+      return undefined;
+    }
+    return JSON.parse(serializedAddBeds);
+  } catch (error) {
+    console.error("Error getting add beds from local storage:", error);
+    return undefined;
+  }
+};

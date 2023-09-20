@@ -102,6 +102,9 @@ input[type="text"],
   font-family: inherit;
   font-size: 15px;
 }
+.smallInput {
+  width: 3rem;
+}
 .LoginLabel {
   color: var(--darkPink);
   font-size: 17px;
