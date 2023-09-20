@@ -29,12 +29,12 @@ export function DataTable({
         {standards.map((item) => (
           <tr key={item.id}>
             {/*This is creating a table row (<tr>) for each item in the standards array. The key is used to uniquely identify each row.*/}
-            <td id="editBTNBox">
+            <td className="EditBTNBox">
               {/*This is creating a table cell (<td>) with the ID "editBTNBox".*/}
               <EditButton onEdit={() => onEdit(item.id)} />
               {/*This is rendering an EditButton component and passing it a function to call when clicked, which calls the onEdit function with the item.id.*/}
             </td>
-            <td id="standardNameBox">
+            <td className="StandardNameBox">
               {/*This is creating a table cell (<td>) with the ID "standardNameBox".*/}
               {/*{item.isEditing ? (...) : (...)}: This is a conditional rendering based on the isEditing property of the item. If isEditing is true, it renders an input field; otherwise, it renders the standard name.*/}
               {item.isEditing ? (
@@ -56,7 +56,7 @@ export function DataTable({
                 item.standardName
               )}
             </td>
-            <td id="saveOrDeleteBTNBox">
+            <td className="SaveOrDeleteBTNBox">
               {/* Render delete and save button when editing: */}
               {item.isEditing && (
                 <>

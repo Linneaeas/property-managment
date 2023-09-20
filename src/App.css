@@ -1,143 +1,97 @@
+/* UNIVERSAL */
+
 :root {
   --lightPink: rgb(255, 240, 248);
   --white: rgb(255, 255, 255);
   --darkerHover: rgb(244, 161, 206);
-  --darkBackground: rgb(196, 96, 149);
-  --darkText: rgb(141, 68, 107);
+  --darkPink: rgb(196, 96, 149);
 }
-/* UNIVERSAL */
 body {
   background-color: var(--lightPink);
-  margin: 0;
   font-family: Quicksand;
 }
-
+* {
+  margin: 0;
+}
 h1,
 h2,
 h3,
-h4 {
-  color: var(--darkBackground);
+h4,
+.ColHeadline {
+  color: var(--darkPink);
 }
 
-#LogoutButton,
-.Link,
-a {
-  background: none;
-  border: none;
-  text-decoration: none;
-  padding: 0;
-  font-family: inherit;
-}
-
-.Dropdown > .Link:focus,
-.Link:hover {
-  color: var(--darkerHover);
-}
-
-#LogoutButton {
-  font-size: 15px;
-  position: absolute;
-  padding: 10px;
-  color: var(--white);
-}
-
-.Link {
-  font-size: 20px;
-  color: var(--white);
-}
-
-a {
-  color: var(--darkBackground);
-  font-size: 17px;
-}
+/*BUTTONS & LINKS & INPUTS */
 
 button:hover,
-.LogoutBTN:hover,
+input:hover,
+select:hover,
+a:hover {
+  cursor: pointer;
+}
+button:hover,
 a:hover {
   color: var(--darkerHover);
   scale: 120%;
 }
-button:hover,
-input:hover,
-a:hover {
-  cursor: pointer;
-}
-
-#saveOrDeleteBTNBox {
-  display: flex;
-  gap: 1rem;
-}
-
-/*LOGIN VIEW*/
-.LoginBTN {
-  background-color: var(--darkBackground);
+.LoginBTN,
+.LogoutBTN {
   font-family: inherit;
-  font-size: 20px;
-  color: var(--white);
-  padding: 0.5rem;
   border: none;
+  padding: 10px;
+  color: var(--white);
+}
+.LoginBTN {
+  background-color: var(--darkPink);
+  font-size: 20px;
   border-radius: 25px;
 }
-
+.LogoutBTN {
+  font-size: 15px;
+  position: absolute;
+  background: none;
+}
 .AddBTN,
-#AddSaveBTN {
-  background-image: url("Images/AddBTN.png");
+.EditBTN,
+.SaveBTN,
+.DeleteBTN {
   background-size: cover;
-  width: 40px;
   aspect-ratio: 1;
-  cursor: pointer;
   border: none;
 }
-
+.AddBTN {
+  background-image: url("Images/AddBTN.png");
+  width: 40px;
+}
 .EditBTN {
   background-image: url("Images/EditBTN.png");
-  background-size: cover;
   width: 20px;
-  aspect-ratio: 1;
-  cursor: pointer;
-  border: none;
 }
-
 .SaveBTN {
   background-image: url("Images/SaveBTN.png");
-  background-size: cover;
   width: 25px;
-  aspect-ratio: 1;
-  cursor: pointer;
-  border: none;
 }
-
 .DeleteBTN {
   background-image: url("Images/DeleteBTN.png");
-  background-size: cover;
   width: 25px;
-  aspect-ratio: 1;
-  cursor: pointer;
+}
+.NavLink,
+.DDLink {
+  background: none;
   border: none;
+  text-decoration: none;
+  font-family: inherit;
 }
-
-.StartPageHeader,
-.Form {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.StartPageHeader {
-  font-size: 25px;
-  padding: 5px;
-  margin: 0;
-  background-color: var(--darkBackground);
+.NavLink {
+  font-size: 20px;
   color: var(--white);
 }
-.Form {
-  flex-direction: column;
-  gap: 1em;
-  margin-top: 2em;
+.DDLink {
+  display: inline-block; /*Necc for scale hover to work*/
+  color: var(--darkPink);
+  font-size: 17px;
+  padding: 0rem 0.5rem 0rem 0.5rem;
 }
-#LoginLabel {
-  color: var(--darkText);
-}
-
 select,
 input[type="text"],
 [type="password"] {
@@ -145,27 +99,29 @@ input[type="text"],
   border-radius: 25px;
   border: none;
   height: 30px;
+  font-family: inherit;
+  font-size: 15px;
+}
+.LoginLabel {
+  color: var(--darkPink);
+  font-size: 17px;
 }
 
-.AddContent {
-  display: flex;
-}
+/*HEADERS & NAVIGATION LAYOUT*/
 
-.AdminHeader {
-  background-color: var(--darkBackground);
-}
-
+.StartPageHeader,
 .AdminNav {
   display: flex;
+  align-items: center;
   justify-content: center;
-  padding: 0.5rem;
   gap: 3rem;
+  padding: 10px;
+  background-color: var(--darkPink);
+  color: var(--white);
 }
-
 .Dropdown {
   position: relative;
 }
-
 .DropdownMenu {
   position: absolute;
   left: 0;
@@ -182,17 +138,9 @@ input[type="text"],
   grid-template-columns: 1fr 1fr;
   gap: 0.5rem;
 }
-
 .DDOverview {
   grid-column: 1 / span 2;
 }
-
-.DDLinks {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-
 .DropdownMenu.visible {
   opacity: 1;
   transform: translateY(0);
@@ -200,34 +148,28 @@ input[type="text"],
   z-index: 1;
 }
 
+/*PAGE CONTENT*/
+
+.LoginForm,
+.PropertyContent,
 .PropertyContainer {
-  position: absolute;
-  width: 100%;
   display: flex;
-  justify-content: center;
-}
-
-.PropertyContent {
-  display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1em;
 }
-
-.PropertyTable {
-  margin-bottom: 1em;
+.LoginForm,
+.PropertyContent {
+  flex-direction: column;
 }
-
 .PropertyTable td,
 th {
   text-align: left;
   padding-left: 1rem;
 }
-
-.ColHeadline {
-  color: var(--darkBackground);
-}
-
-ul {
-  list-style: none;
-  gap: 1em;
+.AddContent,
+.SaveOrDeleteBTNBox {
+  display: flex;
+  gap: 1rem;
 }

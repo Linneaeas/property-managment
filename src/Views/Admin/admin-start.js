@@ -34,7 +34,7 @@ export function AdminStart({ Logout }) {
         {Logout && <LogoutButton Logout={Logout} />}
         <div className="AdminNav">
           <div className="Dropdown" ref={dropdownRef}>
-            <button className="Link" onClick={toggleDropdown}>
+            <button className="NavLink" onClick={toggleDropdown}>
               PROPERTY
             </button>
             <div className={`DropdownMenu ${dropdownVisible ? "visible" : ""}`}>
@@ -43,53 +43,73 @@ export function AdminStart({ Logout }) {
             "" is the value if dropdownVisible is false (an empty string).
              So, if dropdownVisible is true, it adds the class "visible" to the DropdownMenu component; otherwise, it doesn't add any class (empty string).*/}
               <div className="DDOverview">
-                <Link to="/Overview" onClick={handleLinkClick}>
+                <Link
+                  className="DDLink"
+                  to="/Overview"
+                  onClick={handleLinkClick}
+                >
                   Overview
                 </Link>
               </div>
               <div className="DDLinks">
-                <Link to="/Standards" onClick={handleLinkClick}>
+                <Link
+                  className="DDLink"
+                  to="/Standards"
+                  onClick={handleLinkClick}
+                >
                   Standards
                 </Link>
               </div>
               <div className="DDLinks">
-                <Link to="/Suites" onClick={handleLinkClick}>
+                <Link className="DDLink" to="/Suites" onClick={handleLinkClick}>
                   Suites
                 </Link>
               </div>
               <div className="DDLinks">
-                <Link to="/Beds" onClick={handleLinkClick}>
+                <Link className="DDLink" to="/Beds" onClick={handleLinkClick}>
                   Beds
                 </Link>
               </div>
               <div className="DDLinks">
-                <Link to="/Roomtypes" onClick={handleLinkClick}>
+                <Link
+                  className="DDLink"
+                  to="/Roomtypes"
+                  onClick={handleLinkClick}
+                >
                   Roomtypes
                 </Link>
               </div>
               <div className="DDLinks">
-                <Link to="/Properties" onClick={handleLinkClick}>
+                <Link
+                  className="DDLink"
+                  to="/Properties"
+                  onClick={handleLinkClick}
+                >
                   Properties
                 </Link>
               </div>
               <div className="DDLinks">
-                <Link to="/Facilities" onClick={handleLinkClick}>
+                <Link
+                  className="DDLink"
+                  to="/Facilities"
+                  onClick={handleLinkClick}
+                >
                   Facilities
                 </Link>
               </div>
             </div>
           </div>
           <div className="Dropdown">
-            <button className="Link"> REVENUE </button>
+            <button className="NavLink"> REVENUE </button>
           </div>
           <div className="Dropdown">
-            <button className="Link"> FINANCIAL </button>
+            <button className="NavLink"> FINANCIAL </button>
           </div>
           <div className="Dropdown">
-            <button className="Link"> ADVANCED </button>
+            <button className="NavLink"> ADVANCED </button>
           </div>
           <div className="Dropdown">
-            <button className="Link"> MISCELLANIOUS </button>
+            <button className="NavLink"> MISCELLANIOUS </button>
           </div>
         </div>
       </OutsideClickListener>

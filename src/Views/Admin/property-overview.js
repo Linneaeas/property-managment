@@ -25,19 +25,11 @@ export function AdminPropertyOverview() {
     <div className="PropertyContainer">
       <div className="PropertyContent">
         <h1>Property Overview</h1>
-        <h2>Property standards:</h2>
-        <ul>
-          {standards.map((standard) => (
-            <li key={standard.id}>{standard.standardName}</li>
-          ))}
-        </ul>
-
-        <h2>Property suites:</h2>
         <table className="PropertyTable">
           <thead>
             <tr>
-              <th className="ColHeadline">Suite name:</th>
-              <th className="ColHeadline">Suite standard:</th>
+              <th className="ColHeadline">Name:</th>
+              <th className="ColHeadline">Standard:</th>
             </tr>
           </thead>
           {suites.map((suite) => (

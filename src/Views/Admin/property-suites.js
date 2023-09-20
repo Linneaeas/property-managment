@@ -37,7 +37,7 @@ export function DataTable({
       <tbody>
         {suites.map((item) => (
           <tr key={item.id}>
-            <td id="editBTNBox">
+            <td className="EditBTNBox">
               <EditButton onEdit={() => onEdit(item.id)} />
             </td>
             <td>
@@ -59,9 +59,9 @@ export function DataTable({
                 item.suiteName
               )}
             </td>
-            <td id="suitesStandardBox">
+            <td className="SuitesStandardBox">
               {item.isEditing ? (
-                <div className="inputWithDatalist">
+                <div className="InputWithDatalist">
                   <select
                     value={item.selectedStandard}
                     onChange={(e) => {
@@ -85,7 +85,7 @@ export function DataTable({
                 item.selectedStandard || "N/A"
               )}
             </td>
-            <td id="saveOrDeleteBTNBox">
+            <td className="SaveOrDeleteBTNBox">
               {item.isEditing && (
                 <>
                   <DeleteButton onDelete={() => onDelete(item.id)} />

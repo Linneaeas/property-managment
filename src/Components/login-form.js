@@ -12,10 +12,10 @@ export default function LoginForm({ Login, error }) {
     <div className="LoginView">
       <h1 className="StartPageHeader">LOGIN</h1>
       <form onSubmit={submitHandler}>
-        <div className="Form">
+        <div className="LoginForm">
           {error != "" ? <div className="error">{error}</div> : ""}
           <div className="FormGroup">
-            <label htmlFor="username" id="LoginLabel">
+            <label htmlFor="username" className="LoginLabel">
               Username:{" "}
             </label>
             <input
@@ -30,7 +30,7 @@ export default function LoginForm({ Login, error }) {
           </div>
 
           <div className="FormGroup">
-            <label htmlFor="password" id="LoginLabel">
+            <label htmlFor="password" className="LoginLabel">
               Password:{" "}
             </label>
             <input
