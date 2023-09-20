@@ -27,91 +27,101 @@ export function AdminStart({ Logout }) {
   };
 
   return (
-    <div className="AdminHeader">
+    <div className="AdminView">
       <OutsideClickListener onOutsideClick={handleOutsideClick}>
         {" "}
         {/*Call OutsideClickListener to handle outside clicks */}
-        {Logout && <LogoutButton Logout={Logout} />}
-        <div className="AdminNav">
-          <div className="Dropdown" ref={dropdownRef}>
-            <button className="NavLink" onClick={toggleDropdown}>
-              PROPERTY
-            </button>
-            <div className={`DropdownMenu ${dropdownVisible ? "visible" : ""}`}>
-              {/*dropdownVisible is the condition.
+        <nav className="AdminNavContainer">
+          <div className="LogoutBTNDiv">
+            {Logout && <LogoutButton Logout={Logout} />}
+          </div>
+          <div className="AdminNavMainContent">
+            <div className="Dropdown" ref={dropdownRef}>
+              <button className="NavLink" onClick={toggleDropdown}>
+                PROPERTY
+              </button>
+              <div
+                className={`DropdownMenu ${dropdownVisible ? "visible" : ""}`}
+              >
+                {/*dropdownVisible is the condition.
              "visible" is the value if dropdownVisible is true.
             "" is the value if dropdownVisible is false (an empty string).
              So, if dropdownVisible is true, it adds the class "visible" to the DropdownMenu component; otherwise, it doesn't add any class (empty string).*/}
-              <div className="DDOverview">
-                <Link
-                  className="DDLink"
-                  to="/Overview"
-                  onClick={handleLinkClick}
-                >
-                  Overview
-                </Link>
-              </div>
-              <div className="DDLinks">
-                <Link
-                  className="DDLink"
-                  to="/Standards"
-                  onClick={handleLinkClick}
-                >
-                  Standards
-                </Link>
-              </div>
-              <div className="DDLinks">
-                <Link className="DDLink" to="/Suites" onClick={handleLinkClick}>
-                  Suites
-                </Link>
-              </div>
-              <div className="DDLinks">
-                <Link className="DDLink" to="/Beds" onClick={handleLinkClick}>
-                  Beds
-                </Link>
-              </div>
-              <div className="DDLinks">
-                <Link
-                  className="DDLink"
-                  to="/Roomtypes"
-                  onClick={handleLinkClick}
-                >
-                  Roomtypes
-                </Link>
-              </div>
-              <div className="DDLinks">
-                <Link
-                  className="DDLink"
-                  to="/Properties"
-                  onClick={handleLinkClick}
-                >
-                  Properties
-                </Link>
-              </div>
-              <div className="DDLinks">
-                <Link
-                  className="DDLink"
-                  to="/Facilities"
-                  onClick={handleLinkClick}
-                >
-                  Facilities
-                </Link>
+                <div className="DDOverview">
+                  <Link
+                    className="DDLink"
+                    to="/Overview"
+                    onClick={handleLinkClick}
+                  >
+                    Overview
+                  </Link>
+                </div>
+                <div className="DDLinks">
+                  <Link
+                    className="DDLink"
+                    to="/Standards"
+                    onClick={handleLinkClick}
+                  >
+                    Standards
+                  </Link>
+                </div>
+                <div className="DDLinks">
+                  <Link
+                    className="DDLink"
+                    to="/Suites"
+                    onClick={handleLinkClick}
+                  >
+                    Suites
+                  </Link>
+                </div>
+                <div className="DDLinks">
+                  <Link className="DDLink" to="/Beds" onClick={handleLinkClick}>
+                    Beds
+                  </Link>
+                </div>
+                <div className="DDLinks">
+                  <Link
+                    className="DDLink"
+                    to="/Roomtypes"
+                    onClick={handleLinkClick}
+                  >
+                    Roomtypes
+                  </Link>
+                </div>
+                <div className="DDLinks">
+                  <Link
+                    className="DDLink"
+                    to="/Properties"
+                    onClick={handleLinkClick}
+                  >
+                    Properties
+                  </Link>
+                </div>
+                <div className="DDLinks">
+                  <Link
+                    className="DDLink"
+                    to="/Facilities"
+                    onClick={handleLinkClick}
+                  >
+                    Facilities
+                  </Link>
+                </div>
               </div>
             </div>
+            <div className="Dropdown">
+              <button className="NavLink"> REVENUE </button>
+            </div>
+            <div className="Dropdown">
+              <button className="NavLink"> FINANCIAL </button>
+            </div>
+            <div className="Dropdown">
+              <button className="NavLink"> ADVANCED </button>
+            </div>
+            <div className="Dropdown">
+              <button className="NavLink"> MISCELLANIOUS </button>
+            </div>
           </div>
-          <div className="Dropdown">
-            <button className="NavLink"> REVENUE </button>
-          </div>
-          <div className="Dropdown">
-            <button className="NavLink"> FINANCIAL </button>
-          </div>
-          <div className="Dropdown">
-            <button className="NavLink"> ADVANCED </button>
-          </div>
-          <div className="Dropdown">
-            <button className="NavLink"> MISCELLANIOUS </button>
-          </div>
-        </div>
+        </nav>
       </OutsideClickListener>
       <Routes>
         <Route path="/Overview" element={<AdminPropertyOverview />} />

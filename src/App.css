@@ -48,8 +48,8 @@ a:hover {
 }
 .LogoutBTN {
   font-size: 15px;
-  position: absolute;
   background: none;
+  float: left;
 }
 .AddBTN,
 .EditBTN,
@@ -109,15 +109,27 @@ input[type="text"],
 
 /*HEADERS & NAVIGATION LAYOUT*/
 
-.StartPageHeader,
-.AdminNav {
+.StartPageHeader {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 3rem;
-  padding: 10px;
+  flex-wrap: wrap;
   background-color: var(--darkPink);
   color: var(--white);
+  padding: 0.5rem;
+}
+.AdminNavContainer {
+  background-color: var(--darkPink);
+  color: var(--white);
+}
+.AdminNavMainContent {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  display: flex;
+  gap: 3rem;
+  padding: 0.75rem;
 }
 .Dropdown {
   position: relative;

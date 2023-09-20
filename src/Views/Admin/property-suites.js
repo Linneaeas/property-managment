@@ -29,8 +29,8 @@ export function DataTable({
       <thead>
         <tr>
           <th></th>
-          <th className="ColHeadline">NAME:</th>
-          <th className="ColHeadline">STANDARD:</th>
+          <th className="ColHeadline">Name:</th>
+          <th className="ColHeadline">Standard:</th>
           <th></th>
         </tr>
       </thead>
