@@ -24,7 +24,7 @@ export function AdminPropertyOverview() {
   return (
     <div className="PropertyContainer">
       <div className="PropertyContent">
-        <h1>Property Overview</h1>
+        <h1>PROPERTY OVERVIEW</h1>
         <table className="PropertyTable">
           <thead>
             <tr>

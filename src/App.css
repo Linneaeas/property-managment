@@ -24,9 +24,8 @@ h4 {
   color: var(--darkPink);
 }
 .SmallHeadline {
-  font-size: 17px;
-  margin-bottom: -0.25rem;
-  margin-top: 1rem;
+  font-size: 20px;
+  margin-top: 0.5rem;
   text-shadow: 2px 1px 1px rgb(196, 96, 149, 0.2);
 }
 

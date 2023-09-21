@@ -263,8 +263,8 @@ export function AdminPropertyBeds() {
     <div className="PropertyContainer">
       <OutsideClickListener onOutsideClick={handleOutsideClick}>
         <div className="PropertyContent">
-          <h1>Property beds</h1>
-          <h2>Standard beds</h2>
+          <h1>PROPERTY BEDS</h1>
+          <h2 className="SmallHeadline">Standard beds:</h2>
           <DataTable
             beds={beds}
             onEdit={handleEdit}
@@ -272,6 +272,7 @@ export function AdminPropertyBeds() {
             onSave={handleSave}
             setBeds={setBeds}
           />
+
           {!showInput && <AddButton onAdd={handleAddButtonClick} />}
           {showInput && (
             <div className="AddContent">
