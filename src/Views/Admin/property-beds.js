@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import {
   saveBedsToLocalStorage,
   getBedsFromLocalStorage,
+  saveAddBedsToLocalStorage,
+  getAddBedsFromLocalStorage,
 } from "../../Components/local-storage";
 import {
   EditButton,
@@ -11,7 +13,7 @@ import {
 } from "../../Components/buttons";
 import OutsideClickListener from "../../Components/event-listeners";
 
-function DataTableRow({ bed, beds, onEdit, onDelete, onSave, setBeds }) {
+export function DataTableRow({ bed, beds, onEdit, onDelete, onSave, setBeds }) {
   const handleNameChange = (e) => {
     const updatedBeds = beds.map((bedItem) =>
       bedItem.id === bed.id
@@ -101,7 +103,7 @@ function DataTableRow({ bed, beds, onEdit, onDelete, onSave, setBeds }) {
   );
 }
 
-function DataTable({ beds, onEdit, onDelete, onSave, setBeds }) {
+export function DataTable({ beds, onEdit, onDelete, onSave, setBeds }) {
   return (
     <table className="PropertyTable">
       <thead>

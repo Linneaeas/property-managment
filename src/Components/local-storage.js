@@ -83,3 +83,25 @@ export const getAddBedsFromLocalStorage = () => {
     return undefined;
   }
 };
+
+// BEDS
+export const saveRoomtypesToLocalStorage = (roomtypes) => {
+  try {
+    const serializedRoomtypes = JSON.stringify(roomtypes);
+    localStorage.setItem("roomtypes", serializedRoomtypes);
+  } catch (error) {
+    console.error("Error saving roomtypes to local storage:", error);
+  }
+};
+export const getRoomtypesFromLocalStorage = () => {
+  try {
+    const serializedRoomtypes = localStorage.getItem("roomtypes");
+    if (serializedRoomtypes === null) {
+      return undefined;
+    }
+    return JSON.parse(serializedRoomtypes);
+  } catch (error) {
+    console.error("Error getting roomtypes from local storage:", error);
+    return undefined;
+  }
+};
