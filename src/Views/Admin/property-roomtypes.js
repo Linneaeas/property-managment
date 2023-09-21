@@ -24,14 +24,18 @@ export function DataTable({
   handleOutsideClick,
   newRoomtype,
 }) {
+  const bedHeaders = beds.map((bed) => (
+    <th className="ColHeadline" key={bed.id}>
+      {bed.bedName}
+    </th>
+  ));
   return (
     <table className="PropertyTable">
       <thead>
         <tr>
+          <th></th>
           <th className="ColHeadline">Name:</th>
-          <th className="ColHeadline">Bed1</th>
-          <th className="ColHeadline">Bed2</th>
-          <th className="ColHeadline">Bed3</th>
+          {bedHeaders}
         </tr>
       </thead>
       <tbody>
@@ -59,35 +63,41 @@ export function DataTable({
                 item.roomtypeName
               )}
             </td>
-            <td className="RoomtypeBedsBox">
-              {item.isEditing ? (
-                <div className="InputWithDatalist">
-                  <select
-                    value={item.selectedAmountOfBeds}
-                    onChange={(e) => {
-                      const updatedRoomtypes = roomtypes.map((roomtype) =>
-                        roomtype.id === item.id
-                          ? {
-                              ...roomtype,
-                              selectedAmountOfBeds: parseInt(e.target.value),
-                            }
-                          : roomtype
-                      );
-                      setRoomtypes(updatedRoomtypes);
-                    }}
-                  >
-                    <option value="">No. of beds:</option>
-                    {[...Array(11).keys()].map((value) => (
-                      <option key={value} value={value}>
-                        {value}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              ) : (
-                item.selectedAmountOfBeds || "N/A"
-              )}
-            </td>
+            {beds.map((bed) => (
+              <td key={bed.id} className="RoomtypeBedsBox">
+                {item.isEditing ? (
+                  <div className="InputWithDatalist">
+                    <select
+                      className="smallInput"
+                      value={(item.bedOptions && item.bedOptions[bed.id]) || ""}
+                      onChange={(e) => {
+                        const updatedRoomtypes = roomtypes.map((roomtype) =>
+                          roomtype.id === item.id
+                            ? {
+                                ...roomtype,
+                                bedOptions: {
+                                  ...roomtype.bedOptions,
+                                  [bed.id]: parseInt(e.target.value, 10),
+                                },
+                              }
+                            : roomtype
+                        );
+                        setRoomtypes(updatedRoomtypes);
+                      }}
+                    >
+                      <option value="">No. of {bed.bedName}:</option>
+                      {[...Array(12).keys()].map((value) => (
+                        <option key={value} value={value}>
+                          {value}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                ) : (
+                  (item.bedOptions && item.bedOptions[bed.id]) || "0"
+                )}
+              </td>
+            ))}
             <td className="SaveOrDeleteBTNBox">
               {item.isEditing && (
                 <>
@@ -112,12 +122,14 @@ export function AdminPropertyRoomtypes() {
   const [isAddingNewRoomtype, setIsAddingNewRoomtype] = useState(false);
   const [isEditingRoomtype, setIsEditingRoomtype] = useState(false);
   const [beds, setBeds] = useState([]);
+
   useEffect(() => {
     const savedBeds = getBedsFromLocalStorage();
     if (savedBeds) {
       setBeds(savedBeds);
     }
   }, []);
+
   const handleAddButtonClick = () => {
     const newRoomtype = {
       id: roomtypes.length + 1,
@@ -134,15 +146,14 @@ export function AdminPropertyRoomtypes() {
   };
 
   const handleAddRoomtype = () => {
-    const selectedAmountOfBeds = newRoomtype.selectedAmountOfBeds;
     const uniqueId = new Date().getTime();
-    if (newRoomtypeName.trim() !== "" && selectedAmountOfBeds.trim() !== "") {
+    if (newRoomtypeName.trim() !== "") {
       const newRoomtypeToAdd = {
         id: uniqueId,
         roomtypeName: newRoomtypeName,
         isEditing: false,
         editedName: "",
-        selectedAmountOfBeds: selectedAmountOfBeds,
+        bedOptions: {}, // Initialize as an empty object
       };
       const updatedRoomtypes = [...roomtypes, newRoomtypeToAdd];
       setRoomtypes(updatedRoomtypes);
@@ -152,13 +163,24 @@ export function AdminPropertyRoomtypes() {
         roomtypeName: "",
         isEditing: false,
         editedName: "",
-        selectedAmountOfBeds: "",
+        selectedBedOptions: "",
       });
       setShowInput(false);
       setIsAddingNewRoomtype(false);
     } else {
-      alert("Please enter a roomtype name and select am of beds.");
+      alert("Please enter a room type name.");
     }
+  };
+
+  const handleBedOptionChange = (bedId, value) => {
+    const updatedBedOptions = {
+      ...newRoomtype.selectedBedOptions,
+      [bedId]: value,
+    };
+    setNewRoomtype({
+      ...newRoomtype,
+      selectedBedOptions: updatedBedOptions,
+    });
   };
 
   const [newRoomtype, setNewRoomtype] = useState({
@@ -234,6 +256,7 @@ export function AdminPropertyRoomtypes() {
       <OutsideClickListener onOutsideClick={handleOutsideClick}>
         <div className="PropertyContent">
           <h1>PROPERTY ROOMTYPES</h1>
+          <h2 className="SmallHeadline">No. of beds in Roomtype:</h2>
           <DataTable
             roomtypes={roomtypes}
             beds={beds}
@@ -260,24 +283,6 @@ export function AdminPropertyRoomtypes() {
                 }}
                 onFocus={(e) => e.stopPropagation()}
               />
-
-              <select
-                value={newRoomtype.selectedAmountOfBeds}
-                onChange={(e) => {
-                  const updatedNewRoomtype = {
-                    ...newRoomtype,
-                    selectedAmountOfBeds: e.target.value,
-                  };
-                  setNewRoomtype(updatedNewRoomtype);
-                }}
-              >
-                <option value="">No. of beds:</option>
-                {[...Array(11).keys()].map((value) => (
-                  <option key={value} value={value}>
-                    {value}
-                  </option>
-                ))}
-              </select>
 
               <SaveButton onSave={handleAddRoomtype} />
             </div>

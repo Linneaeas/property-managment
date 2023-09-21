@@ -16,9 +16,18 @@ body {
 h1,
 h2,
 h3,
-h4,
+h4 {
+  color: var(--darkPink);
+  text-shadow: 2px 2px 2px rgb(196, 96, 149, 0.4);
+}
 .ColHeadline {
   color: var(--darkPink);
+}
+.SmallHeadline {
+  font-size: 17px;
+  margin-bottom: -0.25rem;
+  margin-top: 1rem;
+  text-shadow: 2px 1px 1px rgb(196, 96, 149, 0.2);
 }
 
 /*BUTTONS & LINKS & INPUTS */
