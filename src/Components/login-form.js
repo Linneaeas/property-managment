@@ -13,7 +13,7 @@ export default function LoginForm({ Login, error }) {
       <h1 className="StartPageHeader">LOGIN</h1>
       <form onSubmit={submitHandler}>
         <div className="LoginForm">
-          {error != "" ? <div className="error">{error}</div> : ""}
+          {error !== "" ? <div className="error">{error}</div> : ""}
           <div className="FormGroup">
             <label htmlFor="username" className="LoginLabel">
               Username:{" "}
@@ -21,7 +21,7 @@ export default function LoginForm({ Login, error }) {
             <input
               type="text"
               name="name"
-              id="LoginInput"
+              id="usernameInput"
               onChange={(e) =>
                 setDetails({ ...details, username: e.target.value })
               }
@@ -36,7 +36,7 @@ export default function LoginForm({ Login, error }) {
             <input
               type="password"
               name="password"
-              id="LoginInput"
+              id="passwordInput"
               onChange={(e) =>
                 setDetails({ ...details, password: e.target.value })
               }

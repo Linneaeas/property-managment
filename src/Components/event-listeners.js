@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
-function OutsideClickListener({ children, onOutsideClick }) {
+export function OutsideClickListener({ children, onOutsideClick }) {
   const wrapperRef = useRef(null);
 
   const handleClickOutside = (event) => {

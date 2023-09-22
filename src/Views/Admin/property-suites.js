@@ -11,6 +11,7 @@ import {
   AddButton,
 } from "../../Components/buttons";
 import OutsideClickListener from "../../Components/event-listeners";
+import { generateUUID } from "../../Components/generate-uuid";
 
 export function DataTable({
   suites,
@@ -119,7 +120,7 @@ export function AdminPropertySuites() {
       suiteName: "",
       isEditing: false,
       editedName: "",
-      selectedStandard: "", // Initialize with an empty string
+      selectedStandard: "",
     };
 
     setNewSuite(newSuite);
@@ -130,10 +131,9 @@ export function AdminPropertySuites() {
 
   const handleAddSuite = () => {
     const selectedStandard = newSuite.selectedStandard;
-    const uniqueId = new Date().getTime(); // Generate a unique ID using timestamp
     if (newSuiteName.trim() !== "" && selectedStandard.trim() !== "") {
       const newSuiteToAdd = {
-        id: uniqueId, // Use the unique ID
+        id: generateUUID(), // Generate a new UUID only for new suites
         suiteName: newSuiteName,
         isEditing: false,
         editedName: "",
@@ -143,8 +143,7 @@ export function AdminPropertySuites() {
       setSuites(updatedSuites);
       saveSuitesToLocalStorage(updatedSuites);
       setNewSuite({
-        // Reset newSuite to its initial state
-        id: uniqueId, // Reset newSuite with the unique ID
+        ...newSuiteToAdd, // Keep the ID of the newly added suite
         suiteName: "",
         isEditing: false,
         editedName: "",
@@ -162,7 +161,7 @@ export function AdminPropertySuites() {
     suiteName: newSuiteName,
     isEditing: false,
     editedName: "",
-    selectedStandard: "", // Initialize selectedStandard
+    selectedStandard: "",
   });
 
   const handleEdit = (id) => {
@@ -175,19 +174,17 @@ export function AdminPropertySuites() {
           editedName: item.suiteName,
         };
       }
-      return { ...item, isEditing: false };
+      return item;
     });
 
-    // Find the edited suite to pass to DataTable
     const editedSuite = updatedSuites.find((item) => item.id === id);
-    setNewSuite(editedSuite); // Pass the edited suite to newSuite
+    setNewSuite(editedSuite);
 
     setSuites(updatedSuites);
     saveSuitesToLocalStorage(updatedSuites);
   };
 
   const handleSave = (id) => {
-    const uniqueId = new Date().getTime();
     const updatedSuites = suites.map((item) => {
       if (item.id === id) {
         setIsEditingSuite(false);
@@ -195,12 +192,12 @@ export function AdminPropertySuites() {
           ...item,
           isEditing: false,
           suiteName: item.editedName,
-          selectedStandard: item.selectedStandard, // Include the selected standard
-          id: uniqueId,
+          selectedStandard: item.selectedStandard,
         };
       }
       return item;
     });
+
     setSuites(updatedSuites);
     saveSuitesToLocalStorage(updatedSuites);
   };
@@ -238,8 +235,8 @@ export function AdminPropertySuites() {
             onSave={handleSave}
             onDelete={handleDelete}
             setSuites={setSuites}
-            isAddingNewSuite={isAddingNewSuite} // Pass the isAddingNewSuite prop
-            isEditingSuite={isEditingSuite} // Pass the isEditingSuite prop
+            isAddingNewSuite={isAddingNewSuite}
+            isEditingSuite={isEditingSuite}
             handleOutsideClick={handleOutsideClick}
             newSuite={newSuite}
           />

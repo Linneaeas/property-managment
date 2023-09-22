@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { AdminStart } from "./admin-start";
 import { getStandardsFromLocalStorage } from "../../Components/local-storage";
 import { getSuitesFromLocalStorage } from "../../Components/local-storage";
 
@@ -32,12 +31,14 @@ export function AdminPropertyOverview() {
               <th className="ColHeadline">Standard:</th>
             </tr>
           </thead>
-          {suites.map((suite) => (
-            <tr key={suite.id}>
-              <td>{suite.suiteName}</td>
-              <td>{suite.selectedStandard}</td>
-            </tr>
-          ))}
+          <tbody>
+            {suites.map((suite) => (
+              <tr key={suite.id}>
+                <td>{suite.suiteName}</td>
+                <td>{suite.selectedStandard}</td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     </div>

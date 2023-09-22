@@ -10,6 +10,7 @@ import {
   saveStandardsToLocalStorage,
   getStandardsFromLocalStorage,
 } from "../../Components/local-storage";
+import { generateUUID } from "../../Components/generate-uuid";
 
 function DataTableRow({
   standard,
@@ -56,15 +57,13 @@ function DataTableRow({
   );
 }
 
-export function DataTable({
+function DataTable({
   standards,
   onEdit,
   onDelete,
   onSave,
   setStandards,
   isAddingNewStandard,
-  isEditingStandard,
-  handleOutsideClick,
 }) {
   return (
     <table className="PropertyTable">
@@ -85,7 +84,6 @@ export function DataTable({
     </table>
   );
 }
-
 export function AdminPropertyStandards() {
   const [standards, setStandards] = useState(
     getStandardsFromLocalStorage() || []
@@ -104,7 +102,7 @@ export function AdminPropertyStandards() {
   const handleAddStandard = () => {
     if (newStandardName.trim() !== "") {
       const newStandard = {
-        id: standards.length + 1,
+        id: generateUUID(),
         standardName: newStandardName,
         isEditing: false,
         editedName: "",
