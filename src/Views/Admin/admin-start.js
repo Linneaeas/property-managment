@@ -11,26 +11,24 @@ import React, { useState, useRef } from "react";
 import OutsideClickListener from "../../Components/event-listeners";
 
 export function AdminStart({ Logout }) {
-  const [dropdownVisible, setDropdownVisible] = useState(false); //State to manage the visibility of the dropdown menu
-  const dropdownRef = useRef(null); // Reference to the dropdown menu element-useRef is a hook that provides a way to create mutable object properties that persist across renders. It allows you to create a reference to a DOM element or any other value and ensures that the reference remains consistent across renders.
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const dropdownRef = useRef(null);
 
   const toggleDropdown = () => {
-    setDropdownVisible(!dropdownVisible); // Toggle the visibility of the dropdown menu, ! makes it turn the opposite of the current value
+    setDropdownVisible(!dropdownVisible);
   };
 
   const handleLinkClick = () => {
-    setDropdownVisible(false); // Handle link click to close the dropdown menu- set the value to be false no matter original value.
+    setDropdownVisible(false);
   };
 
   const handleOutsideClick = () => {
-    setDropdownVisible(false); // Handle outside click to close the dropdown menu
+    setDropdownVisible(false);
   };
 
   return (
     <div className="AdminView">
       <OutsideClickListener onOutsideClick={handleOutsideClick}>
-        {" "}
-        {/*Call OutsideClickListener to handle outside clicks */}
         <nav className="AdminNavContainer">
           <div className="LogoutBTNDiv">
             {Logout && <LogoutButton Logout={Logout} />}
@@ -43,10 +41,6 @@ export function AdminStart({ Logout }) {
               <div
                 className={`DropdownMenu ${dropdownVisible ? "visible" : ""}`}
               >
-                {/*dropdownVisible is the condition.
-             "visible" is the value if dropdownVisible is true.
-            "" is the value if dropdownVisible is false (an empty string).
-             So, if dropdownVisible is true, it adds the class "visible" to the DropdownMenu component; otherwise, it doesn't add any class (empty string).*/}
                 <div className="DDOverview">
                   <Link
                     className="DDLink"
