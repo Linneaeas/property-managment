@@ -161,9 +161,7 @@ input[type="text"],
   grid-template-columns: 1fr 1fr;
   gap: 0.5rem;
 }
-.DDOverview {
-  grid-column: 1 / span 2;
-}
+
 .DropdownMenu.visible {
   opacity: 1;
   transform: translateY(0);
