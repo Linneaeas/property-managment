@@ -130,6 +130,14 @@ export function AdminPropertySuites() {
 
   const handleAddSuite = () => {
     const selectedStandard = newSuite.selectedStandard;
+    const isDuplicateName = suites.some(
+      (suite) => suite.suiteName === newSuiteName
+    );
+
+    if (isDuplicateName) {
+      alert("Suite with this name already exists. Please choose a new name.");
+      return;
+    }
     if (newSuiteName.trim() !== "" && selectedStandard.trim() !== "") {
       const newSuiteToAdd = {
         id: newSuiteName,

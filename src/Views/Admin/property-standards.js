@@ -100,6 +100,17 @@ export function AdminPropertyStandards() {
 
   const handleAddStandard = () => {
     if (newStandardName.trim() !== "") {
+      const isDuplicateName = standards.some(
+        (standard) => standard.standardName === newStandardName
+      );
+
+      if (isDuplicateName) {
+        alert(
+          "Standard with this name already exists. Please choose a new name."
+        );
+        return;
+      }
+
       const newStandard = {
         id: newStandardName,
         standardName: newStandardName,
