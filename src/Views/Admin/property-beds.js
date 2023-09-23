@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
   saveBedsToLocalStorage,
   getBedsFromLocalStorage,
-  saveAddBedsToLocalStorage,
-  getAddBedsFromLocalStorage,
 } from "../../Components/local-storage";
 import {
   EditButton,
@@ -157,14 +155,19 @@ export function AdminPropertyBeds() {
   const handleAddBed = () => {
     const selectedBedSize = newBed.selectedBedSize;
     const selectedBedPersons = newBed.selectedBedPersons;
-    const uniqueId = new Date().getTime();
+    const isDuplicateName = beds.some((bed) => bed.bedName === newBedName);
+
+    if (isDuplicateName) {
+      alert("Bed with this name already exists. Please choose a new name.");
+      return;
+    }
     if (
       newBedName.trim() !== "" &&
       selectedBedSize.trim() !== "" &&
       selectedBedPersons.trim() !== ""
     ) {
       const newBedToAdd = {
-        id: uniqueId,
+        id: newBedName,
         bedName: newBedName,
         isEditing: false,
         editedName: "",
@@ -175,7 +178,7 @@ export function AdminPropertyBeds() {
       setBeds(updatedBeds);
       saveBedsToLocalStorage(updatedBeds);
       setNewBed({
-        id: uniqueId,
+        id: newBedName,
         bedName: "",
         isEditing: false,
         editedName: "",

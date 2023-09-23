@@ -11,6 +11,7 @@ import {
   AddButton,
 } from "../../Components/buttons";
 import OutsideClickListener from "../../Components/event-listeners";
+import { AdminPropertyBeds } from "./property-beds";
 
 export function DataTable({
   roomtypes,
@@ -19,10 +20,6 @@ export function DataTable({
   onDelete,
   onSave,
   setRoomtypes,
-  isAddingNewRoomtype,
-  isEditingRoomtype,
-  handleOutsideClick,
-  newRoomtype,
 }) {
   const bedHeaders = beds.map((bed) => (
     <th className="ColHeadline" key={bed.id}>
@@ -34,7 +31,7 @@ export function DataTable({
       <thead>
         <tr>
           <th></th>
-          <th className="ColHeadline">Name:</th>
+          <th className="ColHeadline">Roomtype:</th>
           {bedHeaders}
         </tr>
       </thead>
@@ -95,7 +92,7 @@ export function DataTable({
                     </select>
                   </div>
                 ) : (
-                  (item.bedOptions && item.bedOptions[bed.id]) || "N/A"
+                  (item.bedOptions && item.bedOptions[bed.id]) || "0"
                 )}
               </td>
             ))}
@@ -147,10 +144,19 @@ export function AdminPropertyRoomtypes() {
   };
 
   const handleAddRoomtype = () => {
-    const uniqueId = new Date().getTime();
+    const isDuplicateName = roomtypes.some(
+      (roomtype) => roomtype.roomtypeName === newRoomtypeName
+    );
+
+    if (isDuplicateName) {
+      alert(
+        "Roomtype with this name already exists. Please choose a new name."
+      );
+      return;
+    }
     if (newRoomtypeName.trim() !== "") {
       const newRoomtypeToAdd = {
-        id: uniqueId,
+        id: newRoomtypeName,
         roomtypeName: newRoomtypeName,
         isEditing: false,
         editedName: "",
@@ -160,7 +166,7 @@ export function AdminPropertyRoomtypes() {
       setRoomtypes(updatedRoomtypes);
       saveRoomtypesToLocalStorage(updatedRoomtypes);
       setNewRoomtype({
-        id: uniqueId,
+        id: newRoomtype,
         roomtypeName: "",
         isEditing: false,
         editedName: "",

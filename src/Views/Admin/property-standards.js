@@ -10,6 +10,7 @@ import {
   saveStandardsToLocalStorage,
   getStandardsFromLocalStorage,
 } from "../../Components/local-storage";
+import { AdminPropertyProperties } from "./property-properties";
 
 function DataTableRow({
   standard,
@@ -17,7 +18,6 @@ function DataTableRow({
   onDelete,
   onSave,
   setStandards,
-  isAddingNewStandard,
   standards,
 }) {
   const handleInputChange = (e) => {
