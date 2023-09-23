@@ -66,6 +66,12 @@ function DataTable({
 }) {
   return (
     <table className="PropertyTable">
+      <thead>
+        <tr>
+          <th></th>
+          <th className="ColHeadline">Name:</th>
+        </tr>
+      </thead>
       <tbody>
         {roomtypes.map((item) => (
           <DataTableRow

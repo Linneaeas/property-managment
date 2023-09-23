@@ -1,4 +1,9 @@
 /* UNIVERSAL */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
 
 :root {
   --lightPink: rgb(255, 240, 248);
@@ -10,9 +15,7 @@ body {
   background-color: var(--lightPink);
   font-family: Quicksand;
 }
-* {
-  margin: 0;
-}
+
 h1,
 h2,
 h3,
@@ -183,6 +186,14 @@ input[type="text"],
 .LoginForm,
 .PropertyContent {
   flex-direction: column;
+}
+
+.PropertyContentNames {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10em;
+  justify-content: center;
 }
 .PropertyTable td,
 th {

@@ -5,9 +5,8 @@ import { AdminPropertyRoomtypes } from "./property-roomtypes";
 
 export function MyProperty() {
   return (
-    <div>
+    <div className="PropertyContentNames">
       <AdminPropertyStandards></AdminPropertyStandards>
-
       <AdminPropertyRoomtypes></AdminPropertyRoomtypes>
       <AdminPropertyBeds></AdminPropertyBeds>
     </div>
