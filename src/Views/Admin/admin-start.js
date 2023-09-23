@@ -7,6 +7,7 @@ import { AdminPropertyBeds } from "./property-beds";
 import { AdminPropertyRoomtypes } from "./property-roomtypes";
 import { AdminPropertyProperties } from "./property-properties";
 import { AdminPropertyFacilities } from "./property-facilities";
+import { MyProperty } from "./my-property";
 import React, { useState, useRef } from "react";
 import OutsideClickListener from "../../Components/event-listeners";
 
@@ -41,7 +42,7 @@ export function AdminStart({ Logout }) {
               <div
                 className={`DropdownMenu ${dropdownVisible ? "visible" : ""}`}
               >
-                <div className="DDOverview">
+                <div className="DDLinks">
                   <Link
                     className="DDLink"
                     to="/Overview"
@@ -50,15 +51,28 @@ export function AdminStart({ Logout }) {
                     Overview
                   </Link>
                 </div>
+
+                <div className="DDLinks">
+                  <Link
+                    className="DDLink"
+                    to="/MyProperty"
+                    onClick={handleLinkClick}
+                  >
+                    My Property
+                  </Link>
+                </div>
+
                 <div className="DDLinks">
                   <Link
                     className="DDLink"
                     to="/Standards"
                     onClick={handleLinkClick}
                   >
+                    {" "}
                     Standards
                   </Link>
                 </div>
+
                 <div className="DDLinks">
                   <Link
                     className="DDLink"
@@ -119,6 +133,7 @@ export function AdminStart({ Logout }) {
       </OutsideClickListener>
       <Routes>
         <Route path="/Overview" element={<AdminPropertyOverview />} />
+        <Route path="/MyProperty" element={<MyProperty />} />
         <Route path="/Standards" element={<AdminPropertyStandards />} />
         <Route path="/Suites" element={<AdminPropertySuites />} />
         <Route path="/Beds" element={<AdminPropertyBeds />} />

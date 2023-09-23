@@ -266,7 +266,7 @@ export function AdminPropertyBeds() {
     <div className="PropertyContainer">
       <OutsideClickListener onOutsideClick={handleOutsideClick}>
         <div className="PropertyContent">
-          <h1>PROPERTY BEDS</h1>
+          <h1>BEDS</h1>
           <h2 className="SmallHeadline">Standard beds:</h2>
           <DataTable
             beds={beds}

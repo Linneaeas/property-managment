@@ -180,7 +180,7 @@ export function AdminPropertyStandards() {
     <div className="PropertyContainer">
       <OutsideClickListener onOutsideClick={handleOutsideClick}>
         <div className="PropertyContent">
-          <h1>PROPERTY STANDARDS</h1>
+          <h1>STANDARDS</h1>
           <DataTable
             standards={standards}
             onEdit={handleEdit}
