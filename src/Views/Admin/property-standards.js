@@ -10,7 +10,6 @@ import {
   saveStandardsToLocalStorage,
   getStandardsFromLocalStorage,
 } from "../../Components/local-storage";
-import { generateUUID } from "../../Components/generate-uuid";
 
 function DataTableRow({
   standard,
@@ -102,7 +101,7 @@ export function AdminPropertyStandards() {
   const handleAddStandard = () => {
     if (newStandardName.trim() !== "") {
       const newStandard = {
-        id: generateUUID(),
+        id: newStandardName,
         standardName: newStandardName,
         isEditing: false,
         editedName: "",

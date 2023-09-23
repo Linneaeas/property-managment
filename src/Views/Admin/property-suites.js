@@ -11,7 +11,6 @@ import {
   AddButton,
 } from "../../Components/buttons";
 import OutsideClickListener from "../../Components/event-listeners";
-import { generateUUID } from "../../Components/generate-uuid";
 
 export function DataTable({
   suites,
@@ -133,7 +132,7 @@ export function AdminPropertySuites() {
     const selectedStandard = newSuite.selectedStandard;
     if (newSuiteName.trim() !== "" && selectedStandard.trim() !== "") {
       const newSuiteToAdd = {
-        id: generateUUID(), // Generate a new UUID only for new suites
+        id: newSuiteName,
         suiteName: newSuiteName,
         isEditing: false,
         editedName: "",
@@ -143,7 +142,7 @@ export function AdminPropertySuites() {
       setSuites(updatedSuites);
       saveSuitesToLocalStorage(updatedSuites);
       setNewSuite({
-        ...newSuiteToAdd, // Keep the ID of the newly added suite
+        ...newSuiteToAdd,
         suiteName: "",
         isEditing: false,
         editedName: "",

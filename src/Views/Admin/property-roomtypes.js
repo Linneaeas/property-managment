@@ -57,7 +57,6 @@ export function DataTable({
                     );
                     setRoomtypes(updatedRoomtypes);
                   }}
-                  onClick={(e) => e.stopPropagation()}
                 />
               ) : (
                 item.roomtypeName
@@ -85,8 +84,10 @@ export function DataTable({
                         setRoomtypes(updatedRoomtypes);
                       }}
                     >
-                      <option value="">No. of {bed.bedName}:</option>
-                      {[...Array(12).keys()].map((value) => (
+                      <option value="no_selection">
+                        No. of {bed.bedName}:
+                      </option>
+                      {[...Array(11).keys()].map((value) => (
                         <option key={value} value={value}>
                           {value}
                         </option>
@@ -94,7 +95,7 @@ export function DataTable({
                     </select>
                   </div>
                 ) : (
-                  (item.bedOptions && item.bedOptions[bed.id]) || "0"
+                  (item.bedOptions && item.bedOptions[bed.id]) || "N/A"
                 )}
               </td>
             ))}
