@@ -174,9 +174,14 @@ input[type="text"],
 
 /*PAGE CONTENT*/
 
-.LoginForm,
-.PropertyContent,
 .PropertyContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
+}
+
+.LoginForm,
+.PropertyContent {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -189,11 +194,8 @@ input[type="text"],
 }
 
 .PropertyContentNames {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 10em;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: auto auto auto;
 }
 .PropertyTable td,
 th {
@@ -204,4 +206,5 @@ th {
 .SaveOrDeleteBTNBox {
   display: flex;
   gap: 1rem;
+  position: sticky;
 }

@@ -44,7 +44,7 @@ export function DataTableRow({ bed, beds, onEdit, onDelete, onSave, setBeds }) {
       <td className="EditBTNBox">
         <EditButton onEdit={() => onEdit(bed.id)} />
       </td>
-      <td>
+      <td className="BedsNameBox">
         {bed.isEditing ? (
           <input
             type="text"
@@ -101,7 +101,7 @@ export function DataTableRow({ bed, beds, onEdit, onDelete, onSave, setBeds }) {
   );
 }
 
-export function DataTable({ beds, onEdit, onDelete, onSave, setBeds }) {
+function DataTable({ beds, onEdit, onDelete, onSave, setBeds }) {
   return (
     <table className="PropertyTable">
       <thead>
@@ -274,7 +274,6 @@ export function AdminPropertyBeds() {
             onSave={handleSave}
             setBeds={setBeds}
           />
-
           {!showInput && <AddButton onAdd={handleAddButtonClick} />}
           {showInput && (
             <div className="AddContent">
@@ -289,7 +288,6 @@ export function AdminPropertyBeds() {
                 }}
                 onFocus={(e) => e.stopPropagation()}
               />
-
               <input
                 className="smallInput"
                 type="text"
@@ -338,7 +336,6 @@ export function AdminPropertyBeds() {
                 placeholder="PRS"
                 maxLength="3"
               />
-
               <SaveButton onSave={handleAddBed} />
             </div>
           )}
