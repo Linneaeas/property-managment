@@ -3,7 +3,7 @@ import { AdminPropertyStandards } from "../../Components/Admin/property-standard
 import { AdminPropertyRoomtypes } from "../../Components/Admin/property-roomtypes";
 import { AdminPropertySuites } from "../../Components/Admin/property-suites";
 
-export function Property() {
+export function StandardsRoomtypesSuites() {
   return (
     <div className="PropertyContentNames">
       <AdminPropertyStandards></AdminPropertyStandards>

@@ -3,7 +3,7 @@ import { AdminPropertyBeds } from "../../Components/Admin/property-beds";
 import { AdminPropertyProperties } from "../../Components/Admin/property-properties";
 import { AdminPropertyFacilities } from "../../Components/Admin/property-facilities";
 
-export function Content() {
+export function BedsPropertiesFacilities() {
   return (
     <div className="PropertyContentNames">
       <AdminPropertyBeds></AdminPropertyBeds>

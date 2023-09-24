@@ -1,8 +1,8 @@
 import LogoutButton from "../../Components/buttons";
 import { Routes, Route, Link } from "react-router-dom";
 import { AdminPropertyOverview } from "./property-overview";
-import { Property } from "./property";
-import { Content } from "./content";
+import { StandardsRoomtypesSuites } from "./standards-roomtypes-suites";
+import { BedsPropertiesFacilities } from "./beds-properties-facilities";
 import { Settings } from "./property-settings";
 import React, { useState, useRef } from "react";
 import OutsideClickListener from "../../Components/event-listeners";
@@ -51,20 +51,20 @@ export function AdminStart({ Logout }) {
                 <div className="DDLinks">
                   <Link
                     className="DDLink"
-                    to="/Property"
+                    to="/Standards.Roomtypes.Suites"
                     onClick={handleLinkClick}
                   >
-                    Property
+                    Standards Roomtypes Suites
                   </Link>
                 </div>
 
                 <div className="DDLinks">
                   <Link
                     className="DDLink"
-                    to="/Content"
+                    to="/Beds.Properties.Facilities"
                     onClick={handleLinkClick}
                   >
-                    Content
+                    Beds Properties Facilities
                   </Link>
                 </div>
 
@@ -96,8 +96,14 @@ export function AdminStart({ Logout }) {
       </OutsideClickListener>
       <Routes>
         <Route path="/Overview" element={<AdminPropertyOverview />} />
-        <Route path="/Property" element={<Property />} />
-        <Route path="/Content" element={<Content />} />
+        <Route
+          path="/Standards.Roomtypes.Suites"
+          element={<StandardsRoomtypesSuites />}
+        />
+        <Route
+          path="/Beds.Properties.Facilities"
+          element={<BedsPropertiesFacilities />}
+        />
         <Route path="/Settings" element={<Settings />} />
       </Routes>
     </div>

@@ -24,9 +24,9 @@ export function DataTable({ suites, setSuites, standards, onEdit, onSave }) {
     <table className="PropertyTable">
       <thead>
         <tr>
-          <th className="ColHeadline">Suite:</th>
+          <th className="ColHeadline"></th>
           <th></th>
-          <th className="ColHeadline">Standard:</th>
+          <th className="ColHeadline"></th>
         </tr>
       </thead>
       <tbody>
