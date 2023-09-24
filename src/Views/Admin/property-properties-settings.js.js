@@ -101,7 +101,7 @@ export function DataTable({
   );
 }
 
-export function AdminPropertyProperties() {
+export function AdminPropertyPropertiesSettings() {
   const [standards, setStandards] = useState(
     getStandardsFromLocalStorage() || []
   );
@@ -186,7 +186,7 @@ export function AdminPropertyProperties() {
     <div className="PropertyContainer">
       <OutsideClickListener onOutsideClick={handleOutsideClick}>
         <div className="PropertyContent">
-          <h1>PROPERTY PROPERTIES</h1>
+          <h1>PROPERTY PROPERTIES SETTINGS</h1>
           <h2 className="SmallHeadline">No. of Roomtypes in Standard:</h2>
           <DataTable
             standards={standards}

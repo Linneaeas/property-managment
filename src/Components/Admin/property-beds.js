@@ -2,14 +2,9 @@ import React, { useEffect, useState } from "react";
 import {
   saveBedsToLocalStorage,
   getBedsFromLocalStorage,
-} from "../../Components/local-storage";
-import {
-  EditButton,
-  SaveButton,
-  DeleteButton,
-  AddButton,
-} from "../../Components/buttons";
-import OutsideClickListener from "../../Components/event-listeners";
+} from "../local-storage";
+import { EditButton, SaveButton, DeleteButton, AddButton } from "../buttons";
+import OutsideClickListener from "../event-listeners";
 
 export function DataTableRow({ bed, beds, onEdit, onDelete, onSave, setBeds }) {
   const handleNameChange = (e) => {

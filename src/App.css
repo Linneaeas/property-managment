@@ -160,9 +160,10 @@ input[type="text"],
   pointer-events: none;
   transform: translateY(-10px);
   transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 0.5rem;
+  width: auto;
 }
 
 .DropdownMenu.visible {

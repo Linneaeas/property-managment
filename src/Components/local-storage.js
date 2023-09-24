@@ -106,28 +106,46 @@ export const getRoomtypesFromLocalStorage = () => {
   }
 };
 
-// PROPERTIES SETTINGS ROOMTYPES IN STANDARDS
-export const savePropertieSettingsToLocalStorage = (propertieSettings) => {
+// PROPERTIES
+export const savePropertiesToLocalStorage = (properties) => {
   try {
-    const serializedPropertieSettings = JSON.stringify(propertieSettings);
-    localStorage.setItem("propertieSettings", serializedPropertieSettings);
+    const serializedProperties = JSON.stringify(properties);
+    localStorage.setItem("properties", serializedProperties);
   } catch (error) {
-    console.error("Error saving propertie Settings to local storage:", error);
+    console.error("Error saving properties to local storage:", error);
   }
 };
-export const getPropertieSettingsFromLocalStorage = () => {
+export const getPropertiesFromLocalStorage = () => {
   try {
-    const serializedPropertieSettings =
-      localStorage.getItem("propertieSettings");
-    if (serializedPropertieSettings === null) {
+    const serializedProperties = localStorage.getItem("properties");
+    if (serializedProperties === null) {
       return undefined;
     }
-    return JSON.parse(serializedPropertieSettings);
+    return JSON.parse(serializedProperties);
   } catch (error) {
-    console.error(
-      "Error getting propertie Settings from local storage:",
-      error
-    );
+    console.error("Error getting properties from local storage:", error);
+    return undefined;
+  }
+};
+
+// FACILITIES
+export const saveFacilitiesToLocalStorage = (properties) => {
+  try {
+    const serializedFacilities = JSON.stringify(properties);
+    localStorage.setItem("properties", serializedFacilities);
+  } catch (error) {
+    console.error("Error saving Facilities to local storage:", error);
+  }
+};
+export const getFacilitiesFromLocalStorage = () => {
+  try {
+    const serializedFacilities = localStorage.getItem("facilities");
+    if (serializedFacilities === null) {
+      return undefined;
+    }
+    return JSON.parse(serializedFacilities);
+  } catch (error) {
+    console.error("Error getting Facilities from local storage:", error);
     return undefined;
   }
 };

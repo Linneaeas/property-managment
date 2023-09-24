@@ -100,7 +100,7 @@ export function DataTable({
   );
 }
 
-export function AdminPropertySuites() {
+export function AdminPropertySuitesSettings() {
   const [suites, setSuites] = useState(getSuitesFromLocalStorage() || []);
   const [showInput, setShowInput] = useState(false);
   const [newSuiteName, setNewSuiteName] = useState("");

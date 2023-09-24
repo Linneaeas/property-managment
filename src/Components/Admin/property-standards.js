@@ -1,15 +1,10 @@
 import React, { useState } from "react";
-import {
-  AddButton,
-  EditButton,
-  SaveButton,
-  DeleteButton,
-} from "../../Components/buttons";
-import OutsideClickListener from "../../Components/event-listeners";
+import { AddButton, EditButton, SaveButton, DeleteButton } from "../buttons";
+import OutsideClickListener from "../event-listeners";
 import {
   saveStandardsToLocalStorage,
   getStandardsFromLocalStorage,
-} from "../../Components/local-storage";
+} from "../local-storage";
 import { AdminPropertyProperties } from "./property-properties";
 
 function DataTableRow({

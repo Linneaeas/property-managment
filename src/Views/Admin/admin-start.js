@@ -1,13 +1,8 @@
 import LogoutButton from "../../Components/buttons";
 import { Routes, Route, Link } from "react-router-dom";
 import { AdminPropertyOverview } from "./property-overview";
-import { AdminPropertyStandards } from "./property-standards";
-import { AdminPropertySuites } from "./property-suites";
-import { AdminPropertyBeds } from "./property-beds";
-import { AdminPropertyRoomtypes } from "./property-roomtypes";
-import { AdminPropertyProperties } from "./property-properties";
-import { AdminPropertyFacilities } from "./property-facilities";
-import { MyProperty } from "./my-property";
+import { Property } from "./property";
+import { Content } from "./content";
 import React, { useState, useRef } from "react";
 import OutsideClickListener from "../../Components/event-listeners";
 
@@ -55,63 +50,20 @@ export function AdminStart({ Logout }) {
                 <div className="DDLinks">
                   <Link
                     className="DDLink"
-                    to="/MyProperty"
+                    to="/Property"
                     onClick={handleLinkClick}
                   >
-                    My Property
+                    Property
                   </Link>
                 </div>
 
                 <div className="DDLinks">
                   <Link
                     className="DDLink"
-                    to="/Standards"
+                    to="/Content"
                     onClick={handleLinkClick}
                   >
-                    {" "}
-                    Standards
-                  </Link>
-                </div>
-
-                <div className="DDLinks">
-                  <Link
-                    className="DDLink"
-                    to="/Suites"
-                    onClick={handleLinkClick}
-                  >
-                    Suites
-                  </Link>
-                </div>
-                <div className="DDLinks">
-                  <Link className="DDLink" to="/Beds" onClick={handleLinkClick}>
-                    Beds
-                  </Link>
-                </div>
-                <div className="DDLinks">
-                  <Link
-                    className="DDLink"
-                    to="/Roomtypes"
-                    onClick={handleLinkClick}
-                  >
-                    Roomtypes
-                  </Link>
-                </div>
-                <div className="DDLinks">
-                  <Link
-                    className="DDLink"
-                    to="/Properties"
-                    onClick={handleLinkClick}
-                  >
-                    Properties
-                  </Link>
-                </div>
-                <div className="DDLinks">
-                  <Link
-                    className="DDLink"
-                    to="/Facilities"
-                    onClick={handleLinkClick}
-                  >
-                    Facilities
+                    Content
                   </Link>
                 </div>
               </div>
@@ -133,13 +85,8 @@ export function AdminStart({ Logout }) {
       </OutsideClickListener>
       <Routes>
         <Route path="/Overview" element={<AdminPropertyOverview />} />
-        <Route path="/MyProperty" element={<MyProperty />} />
-        <Route path="/Standards" element={<AdminPropertyStandards />} />
-        <Route path="/Suites" element={<AdminPropertySuites />} />
-        <Route path="/Beds" element={<AdminPropertyBeds />} />
-        <Route path="/Roomtypes" element={<AdminPropertyRoomtypes />} />
-        <Route path="/Properties" element={<AdminPropertyProperties />} />
-        <Route path="/Facilities" element={<AdminPropertyFacilities />} />
+        <Route path="/Property" element={<Property />} />
+        <Route path="/Content" element={<Content />} />
       </Routes>
     </div>
   );
