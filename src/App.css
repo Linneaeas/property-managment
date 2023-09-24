@@ -209,3 +209,7 @@ th {
   gap: 1rem;
   position: sticky;
 }
+
+.NoSelection {
+  color: var(--darkPink);
+}

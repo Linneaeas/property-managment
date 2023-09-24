@@ -82,8 +82,9 @@ export function DataTable({
                   </div>
                 ) : (
                   (standard.roomtypeOptions &&
-                    standard.roomtypeOptions[roomtype.id]) ||
-                  "0"
+                    standard.roomtypeOptions[roomtype.id]) || (
+                    <span className="NoSelection">{"-"}</span>
+                  )
                 )}
               </td>
             ))}

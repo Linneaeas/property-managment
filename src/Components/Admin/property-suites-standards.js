@@ -54,7 +54,9 @@ export function DataTable({ suites, setSuites, standards, onEdit, onSave }) {
                   </select>
                 </div>
               ) : (
-                suite.selectedStandard || "N/A"
+                suite.selectedStandard || (
+                  <span className="NoSelection">{"-"}</span>
+                )
               )}
             </td>
             <td className="SaveBTNBox">

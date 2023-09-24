@@ -81,7 +81,9 @@ export function DataTable({
                     </select>
                   </div>
                 ) : (
-                  (roomtype.bedOptions && roomtype.bedOptions[bed.id]) || "0"
+                  (roomtype.bedOptions && roomtype.bedOptions[bed.id]) || (
+                    <span className="NoSelection">{"-"}</span>
+                  )
                 )}
               </td>
             ))}

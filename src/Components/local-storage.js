@@ -129,10 +129,10 @@ export const getPropertiesFromLocalStorage = () => {
 };
 
 // FACILITIES
-export const saveFacilitiesToLocalStorage = (properties) => {
+export const saveFacilitiesToLocalStorage = (facilities) => {
   try {
-    const serializedFacilities = JSON.stringify(properties);
-    localStorage.setItem("properties", serializedFacilities);
+    const serializedFacilities = JSON.stringify(facilities);
+    localStorage.setItem("facilities", serializedFacilities);
   } catch (error) {
     console.error("Error saving Facilities to local storage:", error);
   }
