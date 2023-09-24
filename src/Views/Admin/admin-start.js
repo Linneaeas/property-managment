@@ -3,6 +3,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import { AdminPropertyOverview } from "./property-overview";
 import { Property } from "./property";
 import { Content } from "./content";
+import { Settings } from "./property-settings";
 import React, { useState, useRef } from "react";
 import OutsideClickListener from "../../Components/event-listeners";
 
@@ -66,6 +67,16 @@ export function AdminStart({ Logout }) {
                     Content
                   </Link>
                 </div>
+
+                <div className="DDLinks">
+                  <Link
+                    className="DDLink"
+                    to="/Settings"
+                    onClick={handleLinkClick}
+                  >
+                    Settings
+                  </Link>
+                </div>
               </div>
             </div>
             <div className="Dropdown">
@@ -87,6 +98,7 @@ export function AdminStart({ Logout }) {
         <Route path="/Overview" element={<AdminPropertyOverview />} />
         <Route path="/Property" element={<Property />} />
         <Route path="/Content" element={<Content />} />
+        <Route path="/Settings" element={<Settings />} />
       </Routes>
     </div>
   );

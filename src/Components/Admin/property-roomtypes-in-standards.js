@@ -3,9 +3,9 @@ import {
   getStandardsFromLocalStorage,
   saveStandardsToLocalStorage,
   getRoomtypesFromLocalStorage,
-} from "../../Components/local-storage";
-import { EditButton, SaveButton } from "../../Components/buttons";
-import OutsideClickListener from "../../Components/event-listeners";
+} from "../local-storage";
+import { EditButton, SaveButton } from "../buttons";
+import OutsideClickListener from "../event-listeners";
 
 export function DataTable({
   standards,
@@ -40,17 +40,17 @@ export function DataTable({
       <thead>
         <tr>
           <th></th>
-          <th className="ColHeadline">Standards:</th>
+          <th></th>
           {roomtypeHeaders}
         </tr>
       </thead>
       <tbody>
         {standards.map((standard) => (
           <tr key={standard.id}>
+            <td className="ColHeadline">{standard.standardName}</td>
             <td className="EditBTNBox">
               <EditButton onEdit={() => onEdit(standard.id)} />
             </td>
-            <td className="ColHeadline">{standard.standardName}</td>
             {roomtypes.map((roomtype) => (
               <td key={roomtype.id} className="StandardRoomtypeBox">
                 {standard.isEditing ? (
@@ -101,7 +101,7 @@ export function DataTable({
   );
 }
 
-export function AdminPropertyPropertiesSettings() {
+export function RoomtypesInStandards() {
   const [standards, setStandards] = useState(
     getStandardsFromLocalStorage() || []
   );
@@ -126,15 +126,6 @@ export function AdminPropertyPropertiesSettings() {
     }
   }, []);
 
-  const handleRoomtypeOptionChange = (roomtypeId, value) => {
-    const updatedRoomtypeOptions = {
-      ...standard.selectedRoomtypeOptions,
-      [roomtypeId]: value,
-    };
-    setStandard({
-      selectedRoomtypeOptions: updatedRoomtypeOptions,
-    });
-  };
   const handleEdit = (id) => {
     const updatedStandards = standards.map((standard) => {
       if (standard.id === id) {
@@ -173,7 +164,7 @@ export function AdminPropertyPropertiesSettings() {
     }
 
     if (isEditingStandard) {
-      const updatedStandards = standards.map((item) => ({
+      const updatedStandards = standards.map((standard) => ({
         ...standard,
         isEditing: false,
       }));
@@ -186,8 +177,7 @@ export function AdminPropertyPropertiesSettings() {
     <div className="PropertyContainer">
       <OutsideClickListener onOutsideClick={handleOutsideClick}>
         <div className="PropertyContent">
-          <h1>PROPERTY PROPERTIES SETTINGS</h1>
-          <h2 className="SmallHeadline">No. of Roomtypes in Standard:</h2>
+          <h1>ROOMTYPES IN STANDARD</h1>
           <DataTable
             standards={standards}
             setStandards={setStandards}
