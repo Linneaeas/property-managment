@@ -75,7 +75,9 @@ export function DataTable({
                 ) : (
                   (standard.facilityOptions &&
                     standard.facilityOptions[facility.id]) || (
-                    <span className="NoSelection">{"-"}</span>
+                    <div className="OptionChoice">
+                      <span className="NoSelection">{"-"}</span>
+                    </div>
                   )
                 )}
               </td>

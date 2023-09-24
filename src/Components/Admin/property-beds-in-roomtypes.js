@@ -53,14 +53,13 @@ export function DataTable({
               <EditButton onEdit={() => onEdit(roomtype.id)} />
             </td>
             {beds.map((bed) => (
-              <td key={bed.id} className="RoomtypeBedsBox">
+              <td key={bed.id} className="BedsRoomtypeBox">
                 {roomtype.isEditing ? (
                   <div className="InputWithDatalist">
                     <select
                       className="smallInput"
                       value={
-                        (roomtype.bedOptions && roomtype.bedOptions[bed.id]) ||
-                        ""
+                        (bed.bedOptions && roomtype.bedOptions[bed.id]) || ""
                       }
                       onChange={(e) =>
                         handleBedOptionChange(
@@ -81,9 +80,15 @@ export function DataTable({
                     </select>
                   </div>
                 ) : (
-                  (roomtype.bedOptions && roomtype.bedOptions[bed.id]) || (
-                    <span className="NoSelection">{"-"}</span>
-                  )
+                  <div
+                    className={`OptionChoice ${
+                      roomtype.bedOptions[bed.id] !== "no_selection"
+                        ? "selected"
+                        : ""
+                    }`}
+                  >
+                    {roomtype.bedOptions[bed.id] || "-"}
+                  </div>
                 )}
               </td>
             ))}

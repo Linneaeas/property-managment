@@ -81,10 +81,15 @@ export function DataTable({
                     </select>
                   </div>
                 ) : (
-                  (standard.roomtypeOptions &&
-                    standard.roomtypeOptions[roomtype.id]) || (
-                    <span className="NoSelection">{"-"}</span>
-                  )
+                  <div
+                    className={`OptionChoice ${
+                      standard.roomtypeOptions[roomtype.id] !== "no_selection"
+                        ? "selected"
+                        : ""
+                    }`}
+                  >
+                    {standard.roomtypeOptions[roomtype.id] || "-"}
+                  </div>
                 )}
               </td>
             ))}

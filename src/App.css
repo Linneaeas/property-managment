@@ -214,15 +214,6 @@ th {
   position: sticky;
 }
 
-.NoSelection {
-  color: var(--darkPink);
-}
-.OptionChoice {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .Checkbox {
   display: flex;
   justify-content: center;
@@ -252,4 +243,10 @@ input[type="checkbox"]:hover {
 input[type="checkbox"]:checked {
   content: url("Images/CheckedIcon.png");
   background-color: transparent;
+}
+
+.OptionChoice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
