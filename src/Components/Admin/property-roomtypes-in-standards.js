@@ -56,7 +56,7 @@ export function DataTable({
                 {standard.isEditing ? (
                   <div className="InputWithDatalist">
                     <select
-                      className="smallInput"
+                      className="SmallInput"
                       value={
                         (standard.roomtypeOptions &&
                           standard.roomtypeOptions[roomtype.id]) ||

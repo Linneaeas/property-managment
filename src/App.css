@@ -117,7 +117,7 @@ input[type="text"],
   font-family: inherit;
   font-size: 15px;
 }
-.smallInput {
+.SmallInput {
   width: 3rem;
 }
 .LoginLabel {

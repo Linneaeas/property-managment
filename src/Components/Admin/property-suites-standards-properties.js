@@ -3,11 +3,24 @@ import {
   saveSuitesToLocalStorage,
   getSuitesFromLocalStorage,
   getStandardsFromLocalStorage,
+  getPropertiesFromLocalStorage,
 } from "../local-storage";
 import { EditButton, SaveButton } from "../buttons";
 import OutsideClickListener from "../event-listeners";
 
-export function DataTable({ suites, setSuites, standards, onEdit, onSave }) {
+export function DataTable({
+  suites,
+  setSuites,
+  standards,
+  properties,
+  onEdit,
+  onSave,
+}) {
+  const propertieHeaders = properties.map((propertie) => (
+    <th className="ColHeadline" key={propertie.id}>
+      {propertie.propertieName}
+    </th>
+  ));
   const handleStandardOptionChange = (suiteId, value) => {
     const updatedSuites = suites.map((suite) =>
       suite.id === suiteId
@@ -20,13 +33,29 @@ export function DataTable({ suites, setSuites, standards, onEdit, onSave }) {
     setSuites(updatedSuites);
   };
 
+  const handlePropertieOptionChange = (suiteId, propertieId, value) => {
+    const updatedSuites = suites.map((suite) =>
+      suite.id === suiteId
+        ? {
+            ...suite,
+            propertieOptions: {
+              ...suite.propertieOptions,
+              [propertieId]: parseInt(value, 10),
+            },
+          }
+        : suite
+    );
+    setSuites(updatedSuites);
+  };
+
   return (
     <table className="PropertyTable">
       <thead>
         <tr>
-          <th className="ColHeadline"></th>
+          <th className="ColHeadline">Suites:</th>
           <th></th>
-          <th className="ColHeadline"></th>
+          <th className="ColHeadline">Standard: </th>
+          {propertieHeaders}
         </tr>
       </thead>
       <tbody>
@@ -59,6 +88,42 @@ export function DataTable({ suites, setSuites, standards, onEdit, onSave }) {
                 )
               )}
             </td>
+            {properties.map((propertie) => (
+              <td key={propertie.id} className="SuitePropertieBox">
+                {suite.isEditing ? (
+                  <div className="ManualInputSetting">
+                    <input
+                      type="text"
+                      className="SmallInput"
+                      value={
+                        (suite.propertieOptions &&
+                          suite.propertieOptions[propertie.id]) ||
+                        ""
+                      }
+                      onChange={(e) =>
+                        handlePropertieOptionChange(
+                          suite.id,
+                          propertie.id,
+                          e.target.value
+                        )
+                      }
+                    ></input>
+                  </div>
+                ) : (
+                  <div className="OptionChoice">
+                    {suite.propertieOptions &&
+                    suite.propertieOptions[propertie.id] ? (
+                      <span className="OptionChoice">
+                        {suite.propertieOptions[propertie.id]}
+                      </span>
+                    ) : (
+                      <span className="NoSelection">{"-"}</span>
+                    )}
+                  </div>
+                )}
+              </td>
+            ))}
+
             <td className="SaveBTNBox">
               {suite.isEditing && (
                 <>
@@ -73,12 +138,15 @@ export function DataTable({ suites, setSuites, standards, onEdit, onSave }) {
   );
 }
 
-export function SuitesStandards() {
+export function SuitesStandardsProperties() {
   const [suites, setSuites] = useState(getSuitesFromLocalStorage() || []);
   const [showInput, setShowInput] = useState(false);
 
   const [isEditingSuite, setIsEditingSuite] = useState(false);
   const [standards, setStandards] = useState([]);
+  const [properties, setProperties] = useState(
+    getPropertiesFromLocalStorage() || []
+  );
 
   useEffect(() => {
     const savedSuites = getSuitesFromLocalStorage();
@@ -94,19 +162,18 @@ export function SuitesStandards() {
     }
   }, []);
 
+  useEffect(() => {
+    const savedProperties = getPropertiesFromLocalStorage();
+    if (savedProperties) {
+      setProperties(savedProperties);
+    }
+  }, []);
+
   const handleEdit = (id) => {
-    const updatedSuites = suites.map((suite) => {
-      if (suite.id === id) {
-        return {
-          ...suite,
-          isEditing: !suite.isEditing,
-        };
-      }
-      return {
-        ...suite,
-        isEditing: false,
-      };
-    });
+    const updatedSuites = suites.map((suite) => ({
+      ...suite,
+      isEditing: suite.id === id ? !suite.isEditing : suite.isEditing,
+    }));
 
     setSuites(updatedSuites);
   };
@@ -118,6 +185,7 @@ export function SuitesStandards() {
           ...suite,
           isEditing: false,
           selectedStandard: suite.selectedStandard,
+          selectedPropertieSetting: suite.selectedPropertieSetting,
         };
       }
       return suite;
@@ -145,10 +213,11 @@ export function SuitesStandards() {
     <div className="PropertyContainer">
       <OutsideClickListener onOutsideClick={handleOutsideClick}>
         <div className="PropertyContent">
-          <h1>SUITES STANDARDS</h1>
+          <h1>SUITES STANDARDS PROPERTIES</h1>
           <DataTable
             suites={suites}
             standards={standards}
+            properties={properties}
             onEdit={handleEdit}
             onSave={handleSave}
             setSuites={setSuites}
