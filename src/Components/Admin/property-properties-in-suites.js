@@ -1,38 +1,32 @@
 import React, { useEffect, useState } from "react";
 import {
-  getStandardsFromLocalStorage,
-  saveStandardsToLocalStorage,
-  getFacilitiesFromLocalStorage,
+  getSuitesFromLocalStorage,
+  saveSuitesToLocalStorage,
+  getPropertiesFromLocalStorage,
 } from "../local-storage";
 import { EditButton, SaveButton } from "../buttons";
 import OutsideClickListener from "../event-listeners";
 
-export function DataTable({
-  standards,
-  setStandards,
-  facilities,
-  onEdit,
-  onSave,
-}) {
-  const facilityHeaders = facilities.map((facility) => (
-    <th className="ColHeadline" key={facility.id}>
-      {facility.facilityName}
+export function DataTable({ suites, setSuites, properties, onEdit, onSave }) {
+  const propertieHeaders = properties.map((propertie) => (
+    <th className="ColHeadline" key={propertie.id}>
+      {propertie.propertieName}
     </th>
   ));
 
-  const handleFacilityOptionChange = (standardId, facilityId, value) => {
-    const updatedStandards = standards.map((standard) =>
-      standard.id === standardId
+  const handlePropertieOptionChange = (suiteId, propertieId, value) => {
+    const updatedSuites = suites.map((suite) =>
+      suite.id === suiteId
         ? {
-            ...standard,
-            facilityOptions: {
-              ...standard.facilityoptions,
-              [facilityId]: parseInt(value, 10),
+            ...suite,
+            propertieOptions: {
+              ...suite.propertieoptions,
+              [propertieId]: parseInt(value, 10),
             },
           }
-        : standard
+        : suite
     );
-    setStandards(updatedStandards);
+    setSuites(updatedSuites);
   };
 
   return (
@@ -41,40 +35,40 @@ export function DataTable({
         <tr>
           <th></th>
           <th></th>
-          {facilityHeaders}
+          {propertieHeaders}
         </tr>
       </thead>
       <tbody>
-        {standards.map((standard) => (
-          <tr key={standard.id}>
-            <td className="ColHeadline">{standard.standardName}</td>
+        {suites.map((suite) => (
+          <tr key={suite.id}>
+            <td className="ColHeadline">{suite.suiteName}</td>
             <td className="EditBTNBox">
-              <EditButton onEdit={() => onEdit(standard.id)} />
+              <EditButton onEdit={() => onEdit(suite.id)} />
             </td>
-            {facilities.map((facility) => (
-              <td key={facility.id} className="StandardFacilityBox">
-                {standard.isEditing ? (
+            {properties.map((propertie) => (
+              <td key={propertie.id} className="SuitePropertieBox">
+                {suite.isEditing ? (
                   <div className="ManualInputSetting">
                     <input
-                      type="checkbox"
-                      className="Checkbox"
+                      type="text"
+                      className="SmallInput"
                       value={
-                        (standard.facilityOptions &&
-                          standard.facilityOptions[facility.id]) ||
+                        (suite.propertieOptions &&
+                          suite.propertieOptions[propertie.id]) ||
                         ""
                       }
                       onChange={(e) =>
-                        handleFacilityOptionChange(
-                          standard.id,
-                          facility.id,
+                        handlePropertieOptionChange(
+                          suite.id,
+                          propertie.id,
                           e.target.value
                         )
                       }
                     ></input>
                   </div>
                 ) : (
-                  (standard.facilityOptions &&
-                    standard.facilityOptions[facility.id]) || (
+                  (suite.propertieptions &&
+                    suite.propertieOptions[propertie.id]) || (
                     <div className="OptionChoice">
                       <span className="NoSelection">{"-"}</span>
                     </div>
@@ -83,9 +77,9 @@ export function DataTable({
               </td>
             ))}
             <td className="SaveBTNBox">
-              {standard.isEditing && (
+              {suite.isEditing && (
                 <>
-                  <SaveButton onSave={() => onSave(standard.id)} />
+                  <SaveButton onSave={() => onSave(suite.id)} />
                 </>
               )}
             </td>
@@ -96,75 +90,73 @@ export function DataTable({
   );
 }
 
-export function FacilitiesInStandards() {
-  const [standards, setStandards] = useState(
-    getStandardsFromLocalStorage() || []
-  );
-  const [facilities, setFacilities] = useState(
-    getFacilitiesFromLocalStorage() || []
+export function PropertiesInSuites() {
+  const [suites, setSuites] = useState(getSuitesFromLocalStorage() || []);
+  const [properties, setProperties] = useState(
+    getPropertiesFromLocalStorage() || []
   );
   const [showInput, setShowInput] = useState(false);
-  const [isEditingStandard, setIsEditingStandard] = useState(false);
-  const [standard, setStandard] = useState(false);
+  const [isEditingSuite, setIsEditingSuite] = useState(false);
+  const [suite, setSuite] = useState(false);
 
   useEffect(() => {
-    const savedFacilities = getFacilitiesFromLocalStorage();
-    if (savedFacilities) {
-      setFacilities(savedFacilities);
+    const savedProperties = getPropertiesFromLocalStorage();
+    if (savedProperties) {
+      setProperties(savedProperties);
     }
   }, []);
 
   useEffect(() => {
-    const savedStandards = getStandardsFromLocalStorage();
-    if (savedStandards) {
-      setStandards(savedStandards);
+    const savedSuites = getSuitesFromLocalStorage();
+    if (savedSuites) {
+      setSuites(savedSuites);
     }
   }, []);
 
   const handleEdit = (id) => {
-    const updatedStandards = standards.map((standard) => {
-      if (standard.id === id) {
+    const updatedSuites = suites.map((suite) => {
+      if (suite.id === id) {
         return {
-          ...standard,
-          isEditing: !standard.isEditing,
+          ...suite,
+          isEditing: !suite.isEditing,
         };
       }
       return {
-        ...standard,
+        ...suite,
         isEditing: false,
       };
     });
 
-    setStandards(updatedStandards);
+    setSuites(updatedSuites);
   };
 
   const handleSave = (id) => {
-    const updatedStandards = standards.map((standard) => {
-      if (standard.id === id) {
+    const updatedSuites = suites.map((suite) => {
+      if (suite.id === id) {
         return {
-          ...standard,
+          ...suite,
           isEditing: false,
-          selectedFacilitySetting: standard.selectedFacilitySetting,
+          selectedPropertieSetting: suite.selectedPropertieSetting,
         };
       }
-      return standard;
+      return suite;
     });
-    setStandards(updatedStandards);
-    saveStandardsToLocalStorage(updatedStandards);
+    setSuites(updatedSuites);
+    saveSuitesToLocalStorage(updatedSuites);
   };
 
   const handleOutsideClick = () => {
-    if (!isEditingStandard) {
+    if (!isEditingSuite) {
       setShowInput(false);
     }
 
-    if (isEditingStandard) {
-      const updatedStandards = standards.map((standard) => ({
-        ...standard,
+    if (isEditingSuite) {
+      const updatedSuites = suites.map((suite) => ({
+        ...suite,
         isEditing: false,
       }));
-      setStandards(updatedStandards);
-      setIsEditingStandard(false);
+      setSuites(updatedSuites);
+      setIsEditingSuite(false);
     }
   };
 
@@ -172,14 +164,14 @@ export function FacilitiesInStandards() {
     <div className="PropertyContainer">
       <OutsideClickListener onOutsideClick={handleOutsideClick}>
         <div className="PropertyContent">
-          <h1>FACILITIES IN STANDARD</h1>
+          <h1>PROPERTIES IN SUITES</h1>
           <DataTable
-            standards={standards}
-            setStandards={setStandards}
-            facilities={facilities}
+            suites={suites}
+            setSuites={setSuites}
+            properties={properties}
             onEdit={handleEdit}
             onSave={handleSave}
-            isEditingStandard={isEditingStandard}
+            isEditingSuite={isEditingSuite}
             handleOutsideClick={handleOutsideClick}
           />
         </div>
