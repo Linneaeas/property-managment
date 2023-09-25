@@ -23,6 +23,11 @@ h4 {
   color: var(--darkPink);
   text-shadow: 2px 2px 2px rgb(196, 96, 149, 0.4);
 }
+
+.ColHeadlineBigger {
+  color: var(--darkPink);
+  text-shadow: 2px 2px 2px rgb(196, 96, 149, 0.4);
+}
 .ColHeadline {
   color: var(--darkPink);
 }
@@ -206,8 +211,9 @@ input[type="text"],
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  margin-left: 5rem;
-  margin-right: 5rem;
+  margin-left: 10rem;
+  margin-right: 10rem;
+  gap: 2rem;
 }
 
 .PropertyTable td,

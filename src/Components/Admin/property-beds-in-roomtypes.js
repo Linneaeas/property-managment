@@ -40,7 +40,7 @@ export function DataTable({
     <table className="PropertyTable">
       <thead>
         <tr>
-          <th></th>
+          <th className="ColHeadlineBigger">Roomtype:</th>
           <th></th>
           {bedHeaders}
         </tr>
@@ -177,7 +177,8 @@ export function BedsInRoomtypes() {
     <div className="PropertyContainer">
       <OutsideClickListener onOutsideClick={handleOutsideClick}>
         <div className="PropertyContent">
-          <h1>BEDS IN ROOMTYPES</h1>
+          <h1>BEDS</h1>
+          <h2>Roomtypes & beds</h2>
           <DataTable
             roomtypes={roomtypes}
             setRoomtypes={setRoomtypes}

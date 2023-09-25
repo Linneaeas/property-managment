@@ -40,7 +40,7 @@ export function DataTable({
     <table className="PropertyTable">
       <thead>
         <tr>
-          <th></th>
+          <th className="ColHeadlineBigger">Standard:</th>
           <th></th>
           {facilityHeaders}
         </tr>
@@ -179,7 +179,8 @@ export function FacilitiesInStandards() {
     <div className="PropertyContainer">
       <OutsideClickListener onOutsideClick={handleOutsideClick}>
         <div className="PropertyContent">
-          <h1>FACILITIES IN STANDARD</h1>
+          <h1>FACILITIES</h1>
+          <h2>Standards & facilities</h2>
           <DataTable
             standards={standards}
             setStandards={setStandards}
