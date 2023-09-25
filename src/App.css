@@ -90,23 +90,15 @@ a:hover {
   width: 20px;
 }
 
-.NavLink,
-.DDLink {
+.NavLink {
   background: none;
   border: none;
   text-decoration: none;
   font-family: inherit;
-}
-.NavLink {
   font-size: 20px;
   color: var(--white);
 }
-.DDLink {
-  display: inline-block; /*Necc for scale hover to work*/
-  color: var(--darkPink);
-  font-size: 17px;
-  padding: 0rem 0.5rem 0rem 0.5rem;
-}
+
 select,
 input[type="text"],
 [type="password"] {
@@ -149,8 +141,11 @@ input[type="text"],
   gap: 3rem;
   padding: 0.75rem;
 }
+
+/*DROPDOWN*/
 .Dropdown {
   position: relative;
+  display: grid;
 }
 .DropdownMenu {
   position: absolute;
@@ -164,10 +159,9 @@ input[type="text"],
   pointer-events: none;
   transform: translateY(-10px);
   transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
-  display: flex;
-  flex-direction: column;
   gap: 0.5rem;
-  width: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .DropdownMenu.visible {
@@ -177,12 +171,35 @@ input[type="text"],
   z-index: 1;
 }
 
+.DDLinks {
+  display: grid;
+}
+
+.TopDDLink {
+  grid-column: 1 / span 3;
+}
+
+.DDLink,
+.TopDDLink {
+  background: none;
+  border: none;
+  text-decoration: none;
+  font-family: inherit;
+}
+
+.DDLink,
+.TopDDLink {
+  color: var(--darkPink);
+  font-size: 17px;
+  padding: 0rem 0.5rem 0rem 0.5rem;
+}
+
 /*PAGE CONTENT*/
 
 .PropertyContainer {
   display: flex;
   justify-content: center;
-  margin-top: 1em;
+  padding: 3em;
 }
 
 .LoginForm,
@@ -199,9 +216,12 @@ input[type="text"],
 }
 
 .PropertyContentNames {
-  display: grid;
-  grid-template-columns: auto auto auto;
+  display: flex;
+  justify-content: center;
+  gap: 7em;
+  flex-wrap: wrap;
 }
+
 .PropertyTable td,
 th {
   text-align: left;

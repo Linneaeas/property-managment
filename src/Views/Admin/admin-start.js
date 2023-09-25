@@ -40,7 +40,7 @@ export function AdminStart({ Logout }) {
               >
                 <div className="DDLinks">
                   <Link
-                    className="DDLink"
+                    className="TopDDLink"
                     to="/Overview"
                     onClick={handleLinkClick}
                   >
@@ -68,6 +68,15 @@ export function AdminStart({ Logout }) {
                   </Link>
                 </div>
 
+                <div className="DDLinks">
+                  <Link
+                    className="DDLink"
+                    to="/Settings"
+                    onClick={handleLinkClick}
+                  >
+                    Settings
+                  </Link>
+                </div>
                 <div className="DDLinks">
                   <Link
                     className="DDLink"
