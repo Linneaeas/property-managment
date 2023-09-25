@@ -4,13 +4,13 @@ import { RoomtypesInStandards } from "../../Components/Admin/property-roomtypes-
 import { FacilitiesInStandards } from "../../Components/Admin/property-facilities-in-standards.js";
 import { SuitesStandardsProperties } from "../../Components/Admin/property-suites-standards-properties.js";
 
-export function Settings() {
+export function AdminPropertySettings() {
   return (
-    <div className="PropertyContentSettings">
+    <div className="AdminPropertyContentSettings">
       <SuitesStandardsProperties></SuitesStandardsProperties>
+      <FacilitiesInStandards></FacilitiesInStandards>
       <RoomtypesInStandards></RoomtypesInStandards>
       <BedsInRoomtypes></BedsInRoomtypes>
-      <FacilitiesInStandards></FacilitiesInStandards>
     </div>
   );
 }

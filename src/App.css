@@ -145,7 +145,6 @@ input[type="text"],
 /*DROPDOWN*/
 .Dropdown {
   position: relative;
-  display: grid;
 }
 .DropdownMenu {
   position: absolute;
@@ -160,8 +159,8 @@ input[type="text"],
   transform: translateY(-10px);
   transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
   gap: 0.5rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
 }
 
 .DropdownMenu.visible {
@@ -171,27 +170,15 @@ input[type="text"],
   z-index: 1;
 }
 
-.DDLinks {
-  display: grid;
-}
-
-.TopDDLink {
-  grid-column: 1 / span 3;
-}
-
-.DDLink,
-.TopDDLink {
+.DDLink {
   background: none;
   border: none;
   text-decoration: none;
   font-family: inherit;
-}
-
-.DDLink,
-.TopDDLink {
   color: var(--darkPink);
   font-size: 17px;
-  padding: 0rem 0.5rem 0rem 0.5rem;
+  padding: 0.25rem 0.75rem 0.25rem 0.75rem;
+  display: flex;
 }
 
 /*PAGE CONTENT*/
@@ -218,8 +205,9 @@ input[type="text"],
 .PropertyContentNames {
   display: flex;
   justify-content: center;
-  gap: 7em;
   flex-wrap: wrap;
+  margin-left: 5rem;
+  margin-right: 5rem;
 }
 
 .PropertyTable td,
