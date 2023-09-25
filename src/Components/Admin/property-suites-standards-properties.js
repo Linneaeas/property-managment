@@ -52,9 +52,9 @@ export function DataTable({
     <table className="PropertyTable">
       <thead>
         <tr>
-          <th className="ColHeadline">Suites:</th>
           <th></th>
-          <th className="ColHeadline">Standard: </th>
+          <th></th>
+          <th></th>
           {propertieHeaders}
         </tr>
       </thead>

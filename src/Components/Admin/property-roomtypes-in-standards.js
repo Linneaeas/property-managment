@@ -70,9 +70,7 @@ export function DataTable({
                         )
                       }
                     >
-                      <option value="no_selection">
-                        No. of {roomtype.roomtypeName}:
-                      </option>
+                      <option value="">No. of {roomtype.roomtypeName}:</option>
                       {[...Array(11).keys()].map((value) => (
                         <option key={value} value={value}>
                           {value}
@@ -85,7 +83,7 @@ export function DataTable({
                     className={`OptionChoice ${
                       standard.roomtypeOptions[roomtype.id] !== "no_selection"
                         ? "selected"
-                        : ""
+                        : "NoSelection"
                     }`}
                   >
                     {standard.roomtypeOptions[roomtype.id] || "-"}

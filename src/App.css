@@ -249,4 +249,9 @@ input[type="checkbox"]:checked {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: black;
+}
+
+.NoSelection {
+  color: var(--darkPink);
 }
