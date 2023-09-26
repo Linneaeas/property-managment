@@ -85,6 +85,15 @@ export function AdminPropertyOverview() {
     </th>
   ));
 
+  const calculateTotalRoomsInSuite = (suite) => {
+    let totalRooms = 0;
+    for (const roomtype of roomtypes) {
+      const roomCount = suite.selectedRoomtypes[roomtype.id] || 0;
+      totalRooms += parseInt(roomCount, 10);
+    }
+    return totalRooms;
+  };
+
   return (
     <div className="PropertyContainer">
       <div className="PropertyContent">
@@ -96,6 +105,7 @@ export function AdminPropertyOverview() {
               <th className="ColHeadline">Standard:</th>
               {propertieHeaders}
               {roomtypeHeaders}
+              <th className="ColHeadlineBigger">Total:</th>
               <th className="ColHeadline">Facilities:</th>
             </tr>
           </thead>
@@ -136,18 +146,26 @@ export function AdminPropertyOverview() {
                   </td>
                 ))}
 
+                <td>
+                  <div className="OptionChoice">
+                    <span className="OptionChoiceTotal">
+                      {calculateTotalRoomsInSuite(suite)}
+                    </span>
+                  </div>{" "}
+                </td>
+
                 <td id="SuiteStandardFacilityBox">
-                  {facilities
-                    .filter(
-                      (facility) =>
-                        suite.selectedFacilities &&
-                        suite.selectedFacilities[facility.id]
-                    )
-                    .map((facility) => (
-                      <span key={facility.id} className="OptionChoice">
-                        {facility.facilityName},
-                      </span>
-                    ))}
+                  <div className="OptionChoiceFacilities">
+                    {facilities
+                      .filter(
+                        (facility) =>
+                          suite.selectedFacilities &&
+                          suite.selectedFacilities[facility.id]
+                      )
+                      .map((facility) => (
+                        <span key={facility.id}>{facility.facilityName},</span>
+                      ))}
+                  </div>
                 </td>
               </tr>
             ))}
