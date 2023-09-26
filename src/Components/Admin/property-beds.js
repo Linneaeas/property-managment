@@ -28,7 +28,7 @@ export function DataTableRow({ bed, beds, onEdit, onDelete, onSave, setBeds }) {
   const handleBedPersonsChange = (e) => {
     const updatedBeds = beds.map((bedItem) =>
       bedItem.id === bed.id
-        ? { ...bedItem, selectedBedPersons: e.target.value }
+        ? { ...bedItem, selectedBedPersons: parseInt(e.target.value, 10) || 0 }
         : bedItem
     );
     setBeds(updatedBeds);

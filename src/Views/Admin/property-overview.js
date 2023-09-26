@@ -4,6 +4,7 @@ import { getSuitesFromLocalStorage } from "../../Components/local-storage";
 import { getPropertiesFromLocalStorage } from "../../Components/local-storage";
 import { getRoomtypesFromLocalStorage } from "../../Components/local-storage";
 import { getFacilitiesFromLocalStorage } from "../../Components/local-storage";
+import { getBedsFromLocalStorage } from "../../Components/local-storage";
 
 export function AdminPropertyOverview() {
   const [standards, setStandards] = useState([]);
@@ -11,6 +12,7 @@ export function AdminPropertyOverview() {
   const [properties, setProperties] = useState([]);
   const [roomtypes, setRoomtypes] = useState([]);
   const [facilities, setFacilities] = useState([]);
+  const [beds, setBeds] = useState([]);
 
   useEffect(() => {
     const savedStandards = getStandardsFromLocalStorage();
@@ -47,6 +49,13 @@ export function AdminPropertyOverview() {
     }
   }, []);
 
+  useEffect(() => {
+    const savedBeds = getBedsFromLocalStorage();
+    if (savedBeds) {
+      setBeds(savedBeds);
+    }
+  }, []);
+
   const propertieHeaders = properties.map((propertie) => (
     <th className="ColHeadline" key={propertie.id}>
       {propertie.propertieName}
@@ -57,6 +66,7 @@ export function AdminPropertyOverview() {
     const suites = JSON.parse(localStorage.getItem("suites"));
     const standards = getStandardsFromLocalStorage() || [];
     const facilities = getFacilitiesFromLocalStorage() || [];
+    const suiteCapacities = calculateSuiteCapacity(standards, roomtypes, beds);
 
     if (suites && suites.length > 0 && standards && standards.length > 0) {
       return suites.map((suite) => {
@@ -94,6 +104,38 @@ export function AdminPropertyOverview() {
     return totalRooms;
   };
 
+  function calculateRoomtypeCapacity(roomtype, beds) {
+    return Object.keys(roomtype.bedOptions).reduce((totalCapacity, bedId) => {
+      const bed = beds.find((bed) => bed.id === bedId);
+      if (bed) {
+        const bedCapacity = bed.selectedBedPersons || 0;
+        const bedCount = roomtype.bedOptions[bedId] || 0;
+        return totalCapacity + bedCapacity * bedCount;
+      }
+      return totalCapacity;
+    }, 0);
+  }
+
+  function calculateSuiteCapacity(standards, roomtypes, beds) {
+    return standards.map((standard) => {
+      const capacity = roomtypes
+        .filter((roomtype) => roomtype.standardId === standard.id)
+        .reduce((totalCapacity, roomtype) => {
+          return totalCapacity + calculateRoomtypeCapacity(roomtype, beds);
+        }, 0);
+
+      return { ...standard, capacity };
+    });
+  }
+
+  function calculateTotalPersonsInSuite(suite, roomtypes, beds) {
+    return roomtypes.reduce((totalPersons, roomtype) => {
+      const roomCount = suite.selectedRoomtypes[roomtype.id] || 0;
+      const roomtypeCapacity = calculateRoomtypeCapacity(roomtype, beds);
+      return totalPersons + roomCount * roomtypeCapacity;
+    }, 0);
+  }
+
   return (
     <div className="PropertyContainer">
       <div className="PropertyContent">
@@ -105,7 +147,8 @@ export function AdminPropertyOverview() {
               <th className="ColHeadline">Standard:</th>
               {propertieHeaders}
               {roomtypeHeaders}
-              <th className="ColHeadlineBigger">Total:</th>
+              <th className="ColHeadlineBigger">Tot, Rms:</th>
+              <th className="ColHeadlineBigger">Tot. Prs:</th>
               <th className="ColHeadline">Facilities:</th>
             </tr>
           </thead>
@@ -150,6 +193,13 @@ export function AdminPropertyOverview() {
                   <div className="OptionChoice">
                     <span className="OptionChoiceTotal">
                       {calculateTotalRoomsInSuite(suite)}
+                    </span>
+                  </div>{" "}
+                </td>
+                <td>
+                  <div className="OptionChoice">
+                    <span className="OptionChoiceTotal">
+                      {calculateTotalPersonsInSuite(suite, roomtypes, beds)}
                     </span>
                   </div>{" "}
                 </td>
