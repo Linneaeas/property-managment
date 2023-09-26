@@ -157,7 +157,7 @@ export function FacilitiesInStandards() {
     });
 
     setStandards(updatedStandards);
-    saveStandardsToLocalStorage(updatedStandards); // Save to local storage
+    saveStandardsToLocalStorage(updatedStandards);
   };
 
   const handleOutsideClick = () => {

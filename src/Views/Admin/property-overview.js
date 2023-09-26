@@ -3,12 +3,14 @@ import { getStandardsFromLocalStorage } from "../../Components/local-storage";
 import { getSuitesFromLocalStorage } from "../../Components/local-storage";
 import { getPropertiesFromLocalStorage } from "../../Components/local-storage";
 import { getRoomtypesFromLocalStorage } from "../../Components/local-storage";
+import { getFacilitiesFromLocalStorage } from "../../Components/local-storage";
 
 export function AdminPropertyOverview() {
   const [standards, setStandards] = useState([]);
   const [suites, setSuites] = useState([]);
   const [properties, setProperties] = useState([]);
   const [roomtypes, setRoomtypes] = useState([]);
+  const [facilities, setFacilities] = useState([]);
 
   useEffect(() => {
     const savedStandards = getStandardsFromLocalStorage();
@@ -38,6 +40,13 @@ export function AdminPropertyOverview() {
     }
   }, []);
 
+  useEffect(() => {
+    const savedFacilities = getFacilitiesFromLocalStorage();
+    if (savedFacilities) {
+      setFacilities(savedFacilities);
+    }
+  }, []);
+
   const propertieHeaders = properties.map((propertie) => (
     <th className="ColHeadline" key={propertie.id}>
       {propertie.propertieName}
@@ -47,17 +56,21 @@ export function AdminPropertyOverview() {
   const getSuitesFromLocalStorage = () => {
     const suites = JSON.parse(localStorage.getItem("suites"));
     const standards = getStandardsFromLocalStorage() || [];
+    const facilities = getFacilitiesFromLocalStorage() || [];
 
     if (suites && suites.length > 0 && standards && standards.length > 0) {
       return suites.map((suite) => {
         const standard = standards.find(
           (s) => s.standardName === suite.selectedStandard
         );
+
         if (standard) {
           const roomtypeOptions = standard.roomtypeOptions || {};
+          const facilityOptions = standard.facilityOptions || {};
           return {
             ...suite,
             selectedRoomtypes: roomtypeOptions,
+            selectedFacilities: facilityOptions,
           };
         }
         return suite;
@@ -76,22 +89,23 @@ export function AdminPropertyOverview() {
     <div className="PropertyContainer">
       <div className="PropertyContent">
         <h1>PROPERTY OVERVIEW</h1>
-        <table className="PropertyTable">
+        <table className="PropertyTable" id="Overview">
           <thead>
             <tr>
               <th className="ColHeadline">Name:</th>
               <th className="ColHeadline">Standard:</th>
               {propertieHeaders}
               {roomtypeHeaders}
+              <th className="ColHeadline">Facilities:</th>
             </tr>
           </thead>
           <tbody>
             {suites.map((suite) => (
-              <tr key={suite.id}>
+              <tr className="OverviewRow" key={suite.id}>
                 <td>{suite.suiteName}</td>
                 <td>{suite.selectedStandard}</td>
                 {properties.map((propertie) => (
-                  <td key={propertie.id} className="SuitePropertieBox">
+                  <td key={propertie.id}>
                     {suite &&
                     propertie &&
                     suite.propertieOptions &&
@@ -107,7 +121,7 @@ export function AdminPropertyOverview() {
                   </td>
                 ))}
                 {roomtypes.map((roomtype) => (
-                  <td key={roomtype.id} className="SuiteStandardRoomtypeBox">
+                  <td key={roomtype.id}>
                     {suite &&
                     suite.selectedRoomtypes &&
                     suite.selectedRoomtypes[roomtype.id] ? (
@@ -121,6 +135,20 @@ export function AdminPropertyOverview() {
                     )}
                   </td>
                 ))}
+
+                <td id="SuiteStandardFacilityBox">
+                  {facilities
+                    .filter(
+                      (facility) =>
+                        suite.selectedFacilities &&
+                        suite.selectedFacilities[facility.id]
+                    )
+                    .map((facility) => (
+                      <span key={facility.id} className="OptionChoice">
+                        {facility.facilityName},
+                      </span>
+                    ))}
+                </td>
               </tr>
             ))}
           </tbody>

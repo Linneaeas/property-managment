@@ -267,5 +267,19 @@ input[type="checkbox"]:checked {
 }
 
 .NoSelection {
+  display: flex;
+  justify-content: center;
   color: var(--darkPink);
+}
+
+#SuiteStandardFacilityBox {
+  display: flex;
+  gap: 10px;
+  padding-bottom: 2px;
+  font-size: 15px;
+}
+
+.OverviewRow {
+  padding: 1em;
+  box-shadow: 0 1.5px 1px 0 rgb(196, 96, 149, 0.3);
 }
